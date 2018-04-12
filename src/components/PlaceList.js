@@ -5,9 +5,10 @@ import {
   FlatList,
   ActivityIndicator,
   AppRegistry,
-  PermissionsAndroid
+  PermissionsAndroid,
+  TouchableOpacity
 } from 'react-native';
-import { List, ListItem } from "react-native-elements";
+import { List, ListItem, ListView } from "react-native-elements";
 var _ = require('lodash');
 
 // async function requestLocationPermission() {
@@ -89,40 +90,39 @@ export default class PlaceList extends Component {
           console.log(this.state.data);
   }
 
-
-  render() {
-    return (
-      <View> 
-          <List>
+  renderFlatList = () => {
+    if(this.state.data){
+      return(
+        <List>
             <FlatList
               data={this.state.data}
               keyExtractor={item => item.id}
               renderItem={({ item }) =>{
     
-                const rating = item.rating ? item.rating : 'na'
-      
+                //const rating = item.rating ? item.rating : 'na'
                 return (
-                <View>
-                  <ListItem
-                    roundAvatar
-                    title={`${item.name}`+" ("+`${rating}`+")"}
-                    subtitle={`${item.vicinity}` }
-                    avatar={{ uri: item.icon }}
-                    containerStyle={{ borderBottomWidth: 0 }}
-                  />
-                  <View
-                    style={{
-                      height: 1,
-                      width: "86%",
-                      backgroundColor: "#CED0CE",
-                      marginLeft: "14%"
-                    }}
-                  />
-                </View>
+                  <TouchableOpacity>
+                    <ListItem
+                      roundAvatar
+                      title={item.name}
+                      subtitle={`${item.vicinity}` }
+                      avatar={{ uri: item.icon }}
+                      titleStyle={{fontSize: 18}}
+                      subtitleStyle={{fontSize: 14}}
+                    />
+                  </TouchableOpacity>
                 )
               }}
             />
           </List>
+      )
+    }
+  }
+
+  render() {
+    return (
+      <View> 
+          {this.renderFlatList()}
       </View>
     );
   }
