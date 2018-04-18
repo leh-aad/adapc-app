@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
+import { connect } from 'react-redux';
+import { emailChanged, passwordChanged, loginUser } from '../store/actions';
 import firebase from 'firebase';
 import { Content, 
   Form, 
@@ -7,43 +9,30 @@ import { Content,
   Input,
   Button,
   Spinner, 
-  Text } from 'native-base';
+  Text,
+  Toast 
+} from 'native-base';
 
 import { Col, Grid } from 'react-native-easy-grid';
 
-export default class LoginForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { email: '', password: '', error: '', loading: false };
-  } 
+class LoginForm extends Component {
   
+  onEmailChange(text) {
+    this.props.emailChanged(text);
+  }
+
+  onPasswordChange(text){
+    this.props.passwordChanged(text);
+  }
+
   onButtonPress() {
-    const { email, password } = this.state;
-    this.setState({ error: '', loading: true });  
-    
-    firebase.auth().signInWithEmailAndPassword(email, password)
-      .then(this.onLoginSucess.bind(this))
-      .catch(this.onLoginFail.bind(this));
+    const { email, password } = this.props;
+    this.props.loginUser({email,password});
   }
-
-  onLoginSucess() {
-    this.setState({
-      email: '',
-      password: '',
-      error: 'Logado!',
-      loading: false
-    });
-  }
-
-  onLoginFail() {
-    this.setState({ 
-      error: 'Erro de autenticação', 
-      loading: false 
-    });
-  }
+  
   renderButtonOrSpinner() {
-    if (this.state.loading) {
-      return <Spinner color='blue' />;
+    if (this.props.loading) {
+      return <Spinner color='white' />;
     }
     
     return (
@@ -64,6 +53,13 @@ export default class LoginForm extends Component {
     );
   }
 
+  renderError(){
+    if(this.props.error){
+      return(
+        <Text>{this.props.error}</Text>
+      );
+    }
+  }
 
   render() {
     return (
@@ -78,8 +74,8 @@ export default class LoginForm extends Component {
               <Input
                 placeholder="Email"
                 autoCorrect={false}
-                value={this.state.email} 
-                onChangeText={email => this.setState({ email })}
+                value={this.props.email}
+                onChangeText={this.onEmailChange.bind(this)}
               />
             </Item> 
             <Item 
@@ -94,10 +90,11 @@ export default class LoginForm extends Component {
               <Input 
                 placeholder="Senha"
                 secureTextEntry
-                value={this.state.password}
-                onChangeText={password => this.setState({ password })}
+                onChangeText={this.onPasswordChange.bind(this)}
+                value={this.props.password}
               />
             </Item>
+            {this.renderError()}
             {this.renderButtonOrSpinner()}  
           </Form>
           
@@ -118,3 +115,15 @@ export default class LoginForm extends Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    email: state.auth.email,
+    password: state.auth.password,
+    error: state.auth.error,
+    loading: state.auth.loading
+  };
+};
+export default connect(mapStateToProps, {
+  emailChanged, passwordChanged,loginUser
+})(LoginForm);
