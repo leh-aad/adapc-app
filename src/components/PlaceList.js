@@ -8,7 +8,7 @@ import {
   PermissionsAndroid,
   TouchableOpacity
 } from 'react-native';
-import { List, ListItem, ListView } from "react-native-elements";
+import PlaceItem from './PlaceItem';
 var _ = require('lodash');
 
 // async function requestLocationPermission() {
@@ -93,28 +93,17 @@ export default class PlaceList extends Component {
   renderFlatList = () => {
     if(this.state.data){
       return(
-        <List>
-            <FlatList
-              data={this.state.data}
-              keyExtractor={item => item.id}
-              renderItem={({ item }) =>{
-    
-                //const rating = item.rating ? item.rating : 'na'
-                return (
-                  <TouchableOpacity>
-                    <ListItem
-                      roundAvatar
-                      title={item.name}
-                      subtitle={`${item.vicinity}` }
-                      avatar={{ uri: item.icon }}
-                      titleStyle={{fontSize: 18}}
-                      subtitleStyle={{fontSize: 14}}
-                    />
-                  </TouchableOpacity>
-                )
-              }}
-            />
-          </List>
+          <FlatList
+            data={this.state.data}
+            keyExtractor={item => item.id}
+            renderItem={({ item }) =>{
+  
+              //const rating = item.rating ? item.rating : 'na'
+              return (
+                <PlaceItem item={item}/>
+              )
+            }}
+          />
       )
     }
   }

@@ -12,14 +12,23 @@ const RouterComponent = () => {
                     component={LoginScreen}
                     title='Login'
                     hideNavBar={true} 
-                    initial
+
                 />
-                <Scene
-                    key='home'
-                    component={HomeScreen}
-                    title='Home'
-                    hideNavBar={true} 
-                />
+                <Scene key="main">
+                    <Scene
+                        key='homeScreen'
+                        component={HomeScreen}
+                        title='Home'
+                        hideNavBar={true}
+                        initial
+                    />
+                    <Scene
+                        key='details'
+                        component={PlaceDetails}
+                        title='Details'
+                        hideNavBar={true}
+                    />
+                </Scene>
             </Scene>
         </Router>
     );
