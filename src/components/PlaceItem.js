@@ -15,7 +15,7 @@ import {Actions} from 'react-native-router-flux';
 
 const PlaceItem = (props) => {
     const { name, photos, vicinity} = props.item;
-    console.log(photos);
+    //console.log(photos);
     let image = 'http://support.yumpu.com/en/wp-content/themes/qaengine/img/default-thumbnail.jpg';
 
     // if (typeof photos==undefined){

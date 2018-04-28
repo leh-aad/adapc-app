@@ -2,7 +2,7 @@ import React from 'react';
 import { Scene, Router } from 'react-native-router-flux'; 
 import LoginScreen from './components/LoginScreen';
 import HomeScreen from './components/HomeScreen';
-
+import PlaceDetails from './components/PlaceDetails';
 const RouterComponent = () => {
     return(
         <Router>
@@ -14,13 +14,13 @@ const RouterComponent = () => {
                     hideNavBar={true} 
 
                 />
-                <Scene key="main">
+                <Scene key="main" initial>
                     <Scene
                         key='homeScreen'
                         component={HomeScreen}
                         title='Home'
                         hideNavBar={true}
-                        initial
+                        
                     />
                     <Scene
                         key='details'

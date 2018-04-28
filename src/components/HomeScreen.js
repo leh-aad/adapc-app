@@ -25,7 +25,7 @@ class HomeScreen extends Component {
                         <Button transparent><Icon name='menu' /></Button>
                     </Left>
                     <Body>
-                        <Title>Lugares próximos</Title>
+                        <Title>Nas proximidades</Title>
                     </Body>
                 </Header>
                 <PlaceList/>

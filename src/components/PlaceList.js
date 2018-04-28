@@ -58,15 +58,15 @@ export default class PlaceList extends Component {
           (position) => {
               const lat = Number(position.coords.latitude.toFixed(6));
               const long = Number(position.coords.longitude.toFixed(6));
-              console.log(lat);
-              console.log(long);
+              console.log('lat ',lat);
+              console.log('long ',long);
               const { pageToken }  = this.state;
               const urlFirst = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${long}&radius=500&key=AIzaSyDXjSZ-gsHxG-WqacY_ufb52WZAF9_jdpo`;
               const urlNext = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${long}&radius=500&key=AIzaSyDXjSZ-gsHxG-WqacY_ufb52WZAF9_jdpo&pagetoken=${pageToken}`;
 
               let url = pageToken === '' ? urlFirst : urlNext;
 
-              console.log(url);
+              console.log('url ',url);
               fetch(url)
                 .then(res=>{
                    return res.json();
