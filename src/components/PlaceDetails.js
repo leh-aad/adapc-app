@@ -20,34 +20,34 @@ import {
 } from 'native-base';
 
 import { connect } from 'react-redux';
-import { getPlaceDetails } from '../store/actions/PlaceActions'; 
+import { getPlaceDetails, getPlaceImg } from '../store/actions/PlaceActions'; 
 
 class PlaceDetails extends Component { 
 
     state = {
-        place_details: null
+        place_details: null,
+        image : ''
     }
 
     componentDidMount(){
         const place_id = this.props.item.item.place_id;
         this.props.getPlaceDetails({place_id});
-
+        
+        const photo_reference = this.props.item.item.photos[0].photo_reference;
+        this.props.getPlaceImg({photo_reference});
     }
     
     componentWillReceiveProps(next){
-        console.log('props',next.details.result);
-        
+        console.log(next);
         setTimeout(() => {
             this.setState({
-                place_details: next.details.result
+                place_details: next.details.result,
             });
-            console.log('state',this.state.place_details);
-        }, 1000);
-        
-        
-    }
 
+        }, 1000);    
+    }
     render(){
+        const { img_url } = this.props;
         return (
             
             <Container>
@@ -72,6 +72,13 @@ class PlaceDetails extends Component {
                             </Badge>
                         </Right>
                     </CardItem>
+                        <Image
+                            style={{height: 200, width: null, flex: 1}}
+                            
+                        />
+                    <CardItem>
+
+                    </CardItem>
                 </Card>
 
                 }
@@ -83,10 +90,12 @@ class PlaceDetails extends Component {
 
 const mapStateToProps = state => {
     return{
-        details : state.place.details
+        details : state.place.details,
+        img_url : state.place.img_url
     };
 };
 
 export default connect(mapStateToProps,{
-    getPlaceDetails
+    getPlaceDetails,
+    getPlaceImg
 })(PlaceDetails);
