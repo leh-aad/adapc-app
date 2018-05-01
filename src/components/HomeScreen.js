@@ -20,14 +20,14 @@ class HomeScreen extends Component {
       return ( 
         <Container>
             <Content>
-                <Header style={{backgroundColor: '#807DFF'}}>
+                {/* <Header style={{backgroundColor: '#807DFF'}}>
                     <Left>
                         <Button transparent><Icon name='menu' /></Button>
                     </Left>
                     <Body>
                         <Title>Nas proximidades</Title>
                     </Body>
-                </Header>
+                </Header> */}
                 <PlaceList/>
             </Content>
         </Container>

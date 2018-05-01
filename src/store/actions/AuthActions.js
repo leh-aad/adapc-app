@@ -29,7 +29,7 @@ export const loginUser = ({email,password}) => {
         firebase.auth().signInWithEmailAndPassword(email,password)
             .then(user => {
                 dispatch({type: LOGIN_SUCCESS, payload: user});
-                Actions.homeScreen();
+                Actions.main();
             })
             .catch( (error) => {                
                 console.log(error);
