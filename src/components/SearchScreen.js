@@ -7,7 +7,7 @@ import {
   View
 } from 'react-native';
 
-class Map extends Component{
+class SearchScreen extends Component{
   
 //   openSearchModal() {
 //     RNGooglePlaces.openAutocompleteModal()
@@ -29,4 +29,4 @@ class Map extends Component{
   }
 }
 
-export default Map;
+export default SearchScreen;

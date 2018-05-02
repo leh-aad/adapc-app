@@ -5,7 +5,7 @@ import { View } from 'react-native';
 import LoginScreen from './components/LoginScreen';
 import HomeScreen from './components/HomeScreen';
 import PlaceDetails from './components/PlaceDetails';
-import MapSearch from './components/Map';
+import SearchScreen from './components/SearchScreen';
 import BadgeScreen from './components/BadgesScreen';
 import DrawerMenu from './components/DrawerMenu';
 
@@ -19,9 +19,9 @@ const TabIcon = ({title}) => {
         iconName = 'ios-navigate-outline';
         label = 'Proximidades';
     }
-    else if(title == 'Mapa'){
+    else if(title == 'Pesquisar'){
         iconName = 'search';
-        label = 'Mapa';
+        label = 'Pesquisar';
     }
     else if( title == 'Medalhas'){
         iconName = 'ribbon'
@@ -77,9 +77,9 @@ const RouterComponent = () => {
                                     icon={TabIcon}
                                 />
                                 <Scene
-                                    key="mapSearch"
-                                    component={MapSearch}
-                                    title="Mapa"
+                                    key="searchScreen"
+                                    component={SearchScreen}
+                                    title="Pesquisar"
                                     icon={TabIcon}
                                 />
                                 <Scene
