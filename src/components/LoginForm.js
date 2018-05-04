@@ -49,7 +49,7 @@ class LoginForm extends Component {
           marginTop: 10
         }}
       >
-        <Text> Enviar </Text>
+        <Text> Logar </Text>
       </Button>
     );
   }

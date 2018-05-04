@@ -8,7 +8,7 @@ class RegisterScreen extends Component {
 
     render() {
       return ( 
-        <Container style={{backgroundColor : 'white'}}>
+        <Container style={{backgroundColor : 'white', flex: 1}}>
             <Content>
                 <RegisterForm />
             </Content>
@@ -17,10 +17,4 @@ class RegisterScreen extends Component {
     }
   }
   
-  export default RegisterScreen;
-
-  const styles = ({
-    linearGradient: {
-      flex: 1
-    }
-  });
+export default RegisterScreen;

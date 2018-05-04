@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 import { Image, StatusBar } from "react-native";
 import { Container, Content, Text, List, ListItem } from "native-base";
-import { Actions } from 'react-native-router-flux';
-
+import { logoutUser } from '../store/actions';
+import { connect } from 'react-redux';
 const routes = ["Perfil", "Sair"];
 
 class DrawerMenu extends Component {
+
+  onPressAction(route){
+      if(route == "Sair"){
+          return this.props.logoutUser();
+      }
+  }    
 
   render() {
     return (
@@ -27,7 +33,9 @@ class DrawerMenu extends Component {
                 renderRow={data => {
                 return (
                     <ListItem
-                        button>
+                        button
+                        onPress={()=>this.onPressAction(data)}
+                    >
                         <Text>{data}</Text>
                     </ListItem>
                 );
@@ -38,5 +46,6 @@ class DrawerMenu extends Component {
     );
   }
 }
-
-export default DrawerMenu;
+export default connect(null, {
+    logoutUser
+  })(DrawerMenu);

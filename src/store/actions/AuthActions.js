@@ -8,7 +8,8 @@ import {
     LOGIN_USER,
     REGISTER_USER,
     REGISTER_SUCCESS,
-    REGISTER_FAIL
+    REGISTER_FAIL,
+    LOGOUT_USER
 } from './types';
 
 export const emailChanged = (text) => {
@@ -42,13 +43,24 @@ export const loginUser = ({email,password}) => {
     
 };
 
+export const logoutUser = () => {
+    return(dispatch)=>{
+        dispatch({type: LOGOUT_USER});
+
+        firebase.auth().signOut()
+            .then( () => {
+                Actions.login();
+            })
+    }
+}
+
 const loginUserFail = (dispatch) => {
     dispatch({
        type: LOGIN_FAIL 
     });
 }
 
-const registerUser = ({email, password}) => {
+export const registerUser = ({email, password}) => {
     return(dispatch) =>{
         dispatch({type: REGISTER_USER});
 
