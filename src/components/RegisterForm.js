@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import { connect } from 'react-redux';
-import { Actions } from 'react-native-router-flux'
-import { emailChanged, passwordChanged, loginUser } from '../store/actions';
+import { emailChanged, passwordChanged, registerUser } from '../store/actions';
 import firebase from 'firebase';
 import { Content, 
   Form, 
@@ -14,9 +13,7 @@ import { Content,
   Toast 
 } from 'native-base';
 
-import { Col, Grid } from 'react-native-easy-grid';
-
-class LoginForm extends Component {
+class RegisterForm extends Component {
   
   onEmailChange(text) {
     this.props.emailChanged(text);
@@ -28,7 +25,7 @@ class LoginForm extends Component {
 
   onButtonPress() {
     const { email, password } = this.props;
-    this.props.loginUser({email,password});
+    this.props.registerUser({email,password});
   }
   
   renderButtonOrSpinner() {
@@ -49,7 +46,7 @@ class LoginForm extends Component {
           marginTop: 10
         }}
       >
-        <Text> Enviar </Text>
+        <Text> Cadastrar </Text>
       </Button>
     );
   }
@@ -65,7 +62,7 @@ class LoginForm extends Component {
   render() {
     return (
       <View style={{ flex: 1, alignItems: 'center' }}> 
-        <Content style={{ maxWidth: '80%' }}> 
+        <Content> 
           <Form>
             <Item 
               last 
@@ -95,29 +92,8 @@ class LoginForm extends Component {
                 value={this.props.password}
               />
             </Item>
-            {this.renderError()}
             {this.renderButtonOrSpinner()}  
           </Form>
-          
-          <Grid style={{marginTop:10}}>
-            <Col style={{ width: '50%' }}>
-              <Button 
-                transparent 
-                light   
-                style={{ alignItems: 'flex-start' }}
-                onPress={()=>{
-                  Actions.register();
-                }}
-              >
-                  <Text style={{ fontSize: 11 }}>Cadastre-se aqui!</Text>
-              </Button> 
-            </Col>
-            <Col style={{ width: '60%' }}>
-              <Button transparent light style={{ alignItems: 'flex-start' }}>
-               <Text style={{ fontSize: 10 }}>Esqueceu sua senha?</Text>
-              </Button> 
-            </Col>
-          </Grid>
         </Content>
       </View>
     );
@@ -133,5 +109,5 @@ const mapStateToProps = state => {
   };
 };
 export default connect(mapStateToProps, {
-  emailChanged, passwordChanged,loginUser
-})(LoginForm);
+  emailChanged, passwordChanged,registerUser
+})(RegisterForm);

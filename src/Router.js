@@ -1,5 +1,5 @@
 import React from 'react';
-import { Scene, Router, Tabs, Lightbox, Drawer } from 'react-native-router-flux'; 
+import { Scene, Router, Tabs, Lightbox, Drawer, Stack } from 'react-native-router-flux'; 
 import { Icon, Text } from 'native-base';
 import { View } from 'react-native';
 import LoginScreen from './components/LoginScreen';
@@ -8,7 +8,7 @@ import PlaceDetails from './components/PlaceDetails';
 import SearchScreen from './components/SearchScreen';
 import BadgeScreen from './components/BadgesScreen';
 import DrawerMenu from './components/DrawerMenu';
-
+import RegisterScreen from './components/RegisterScreen';
 const TabIcon = ({title}) => {
     // let color = selected ? '#807DFF' : 'black';
     let label = '';
@@ -48,14 +48,28 @@ const RouterComponent = () => {
             <Scene 
                 key="root" 
                 navBarButtonColor='white'
-                navigationBarStyle={{backgroundColor: '#807DFF'}}>
-                <Scene
-                    key='login'
-                    component={LoginScreen}
-                    title='Login'
-                    hideNavBar={true} 
-                />
-                <Lightbox key="lightbox" initial >
+                navigationBarStyle={{backgroundColor: '#807DFF'}}
+            >
+                <Stack
+                    key='auth'
+                    initial
+                    hideNavBar
+                >
+                    <Scene
+                        key='login'
+                        component={LoginScreen}
+                        title='Login'
+                        hideNavBar={true}
+                    />
+                    <Scene
+                        key='register'
+                        component={RegisterScreen}
+                        title='Cadastro'
+                        hideNavBar={false}
+                    />
+                </Stack>
+                
+                <Lightbox key="lightbox">
                     <Drawer
                         key="drawer"
                         contentComponent={DrawerMenu}
@@ -82,21 +96,21 @@ const RouterComponent = () => {
                                     title="Pesquisar"
                                     icon={TabIcon}
                                 />
-                                <Scene
+                                {/* <Scene
                                     key="badgeScreen"
                                     component={BadgeScreen}
                                     title="Medalhas"
                                     icon={TabIcon}
-                                />
+                                /> */}
                             </Tabs>
                         </Scene>
                     </Drawer>
-                    <Scene
-                        key='details'
-                        component={PlaceDetails}
-                        title='Detalhes'
-                    />
                 </Lightbox>
+                <Scene
+                    key='details'
+                    component={PlaceDetails}
+                    title='Detalhes'
+                />
             </Scene>
         </Router>
     );

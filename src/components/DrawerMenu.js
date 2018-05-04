@@ -3,7 +3,7 @@ import { Image, StatusBar } from "react-native";
 import { Container, Content, Text, List, ListItem } from "native-base";
 import { Actions } from 'react-native-router-flux';
 
-const routes = ["Home", "Chat", "Profile"];
+const routes = ["Perfil", "Sair"];
 
 class DrawerMenu extends Component {
 

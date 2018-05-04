@@ -17,7 +17,8 @@ import {
     Body, 
     Right,
     Badge,
-    Label
+    Label,
+    Spinner
 } from 'native-base';
 
 import { connect } from 'react-redux';
@@ -31,11 +32,12 @@ class PlaceDetails extends Component {
     }
 
     componentDidMount(){
-        const place_id = this.props.item.item.place_id;
+        console.log(this.props);
+        const place_id = this.props.item.place_id;
         this.props.getPlaceDetails({place_id});
         
-        if(this.props.item.item.photos){
-            const photo_reference = this.props.item.item.photos[0].photo_reference;
+        if(this.props.item.photos){
+            const photo_reference = this.props.item.photos[0].photo_reference;
             this.props.getPlaceImg({photo_reference});
         }
 

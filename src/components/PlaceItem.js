@@ -26,7 +26,7 @@ const PlaceItem = (props) => {
     // }
 
     onButtonPress = () => {
-        Actions.push('details', {item: props} )
+        Actions.push('details', props )
     }
 
     return(

@@ -5,7 +5,10 @@ import {
     PASSWORD_CHANGED,
     LOGIN_SUCCESS,
     LOGIN_FAIL,
-    LOGIN_USER
+    LOGIN_USER,
+    REGISTER_USER,
+    REGISTER_SUCCESS,
+    REGISTER_FAIL
 } from './types';
 
 export const emailChanged = (text) => {
@@ -43,4 +46,18 @@ const loginUserFail = (dispatch) => {
     dispatch({
        type: LOGIN_FAIL 
     });
+}
+
+const registerUser = ({email, password}) => {
+    return(dispatch) =>{
+        dispatch({type: REGISTER_USER});
+
+        firebase.auth().createUserWithEmailAndPassword(email,password)
+            .then(user =>{
+                dispatch({type: REGISTER_SUCCESS, payload: user})
+            })
+            .catch((error) =>{
+                dispatch({type: REGISTER_FAIL});
+            })
+    }
 }
