@@ -9,4 +9,5 @@ export const REGISTER_SUCCESS = 'register_success';
 export const REGISTER_FAIL = 'register_fail';
 export const GET_DETAILS = 'get_place_details';
 export const GET_PLACE_IMG = 'get_place_img';
- 
+export const GET_NEAR_PLACES = 'get_near_places'; 
+export const GET_NEAR_PLACES_SUCCESS = 'get_near_places_success';

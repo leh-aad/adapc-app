@@ -1,7 +1,38 @@
 import { Actions } from 'react-native-router-flux';
 import {
-    GET_DETAILS, GET_PLACE_IMG
+    GET_DETAILS, 
+    GET_PLACE_IMG,
+    GET_NEAR_PLACES,
+    GET_NEAR_PLACES_SUCCESS
 } from './types';
+var _ = require('lodash');
+
+export const getNearPlaces = () => {
+    return(dispatch) => {
+        dispatch({type: GET_NEAR_PLACES})
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                const lat = Number(position.coords.latitude.toFixed(6));
+                const long = Number(position.coords.longitude.toFixed(6));
+                let url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${long}&radius=500&key=AIzaSyDXjSZ-gsHxG-WqacY_ufb52WZAF9_jdpo`;
+                
+                fetch(url)
+                .then(res=>{
+                    return res.json();
+                })
+                .then(res=>{
+                   const data = _.uniqBy([...res.results], 'id');
+                   dispatch({ type: GET_NEAR_PLACES_SUCCESS, payload: data});
+                })
+                .catch((error) => {
+                    console.log(error);
+                })
+            }
+        )
+            
+    }
+
+}
 
 export const getPlaceDetails = ({place_id}) => {
     return(dispatch) => {
@@ -15,7 +46,7 @@ export const getPlaceDetails = ({place_id}) => {
             }
         })
         .then(res => {
-            dispatch({type: GET_DETAILS, payload: res})
+            dispatch({type: GET_DETAILS, payload: res});
         })
         .catch((error) => {
             console.log(error);

@@ -52,7 +52,6 @@ const RouterComponent = () => {
             >
                 <Stack
                     key='auth'
-                    initial
                     hideNavBar
                 >
                     <Scene
@@ -69,15 +68,16 @@ const RouterComponent = () => {
                     />
                 </Stack>
                 
-                <Lightbox key="lightbox">
+                <Lightbox key="lightbox" initial>
                     <Drawer
                         key="drawer"
                         contentComponent={DrawerMenu}
                         drawerIcon={MenuIcon}
                         hideNavBar
                     >
-                        <Scene key="main" >
+                        <Scene key="main">
                             <Tabs
+                                
                                 key="tabbar"
                                 tabBarPosition='bottom' 
                                 default="homeScreen"
