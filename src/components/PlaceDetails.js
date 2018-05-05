@@ -20,7 +20,6 @@ import {
     Label,
     Spinner
 } from 'native-base';
-
 import { connect } from 'react-redux';
 import { getPlaceDetails, getPlaceImg } from '../store/actions/PlaceActions'; 
 
@@ -28,14 +27,13 @@ class PlaceDetails extends Component {
 
     state = {
         place_details: null,
-        image : ''
+        img: ''
     }
 
     componentDidMount(){
-        console.log(this.props);
         const place_id = this.props.item.place_id;
         this.props.getPlaceDetails({place_id});
-        
+    
         if(this.props.item.photos){
             const photo_reference = this.props.item.photos[0].photo_reference;
             this.props.getPlaceImg({photo_reference});
@@ -43,16 +41,16 @@ class PlaceDetails extends Component {
 
     }
     
-    componentWillReceiveProps(next){
-        console.log(next);
+    componentWillReceiveProps(){
         setTimeout(() => {
             this.setState({
-                place_details: next.details.result,
+                place_details: this.props.details,
+                img: this.props.img_url
             });
         }, 1000);    
     }
 
-    openNow(openNow){
+    renderOpenNow(openNow){
         if(openNow===undefined){
             return ;
         }
@@ -73,10 +71,12 @@ class PlaceDetails extends Component {
     }
 
     render(){
-        const { img_url, details } = this.props;
+        const { img_url, details, loading } = this.props;
         return (
             
             <Container>
+                {loading && <Spinner color='blue'/>}
+
                 {this.state && this.state.place_details &&
                     
                 <Content>
@@ -84,7 +84,7 @@ class PlaceDetails extends Component {
                         <CardItem cardBody>
                             <Image
                                 style={{height: 200, width: null, flex: 1}}
-                                source={{uri: img_url }}
+                                source={{uri: this.state.img }}
                             />
                         </CardItem>
                         <CardItem> 
@@ -149,7 +149,8 @@ class PlaceDetails extends Component {
 const mapStateToProps = state => {
     return{
         details : state.place.details,
-        img_url : state.place.img_url
+        img_url : state.place.img_url,
+        loading : state.place.loading
     };
 };
 

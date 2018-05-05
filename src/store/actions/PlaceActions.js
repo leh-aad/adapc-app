@@ -3,7 +3,8 @@ import {
     GET_DETAILS, 
     GET_PLACE_IMG,
     GET_NEAR_PLACES,
-    GET_NEAR_PLACES_SUCCESS
+    GET_NEAR_PLACES_SUCCESS,
+    GET_DETAILS_SUCCESS
 } from './types';
 var _ = require('lodash');
 
@@ -36,6 +37,7 @@ export const getNearPlaces = () => {
 
 export const getPlaceDetails = ({place_id}) => {
     return(dispatch) => {
+        dispatch({type: GET_DETAILS})
         let url = 'https://maps.googleapis.com/maps/api/place/details/json?placeid='+place_id+'&key=AIzaSyDXjSZ-gsHxG-WqacY_ufb52WZAF9_jdpo';
         fetch(url)
         .then(res => {
@@ -46,7 +48,7 @@ export const getPlaceDetails = ({place_id}) => {
             }
         })
         .then(res => {
-            dispatch({type: GET_DETAILS, payload: res});
+            dispatch({type: GET_DETAILS_SUCCESS, payload: res});
         })
         .catch((error) => {
             console.log(error);

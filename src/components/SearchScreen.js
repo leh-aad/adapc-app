@@ -14,8 +14,10 @@ class SearchScreen extends Component{
       placeholder='Pesquisar local'
       minLength={2}
       autoFocus={false}
-      onPress={(data) => {
-        Actions.push('details', { item : data});
+      fetchDetails={true}
+      onPress={(data, details) => {
+        console.log(details);
+        Actions.push('details', { item : details});
       }}
       query={{
         // available options: https://developers.google.com/places/web-service/autocomplete
