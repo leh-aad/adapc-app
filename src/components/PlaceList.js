@@ -21,7 +21,6 @@ class PlaceList extends Component {
     if(this.props.place_list){
       return(
           <FlatList
-            style={{backgroundColor: 'white'}}
             data={this.props.place_list}
             keyExtractor={item => item.id}
             renderItem={({ item }) =>{

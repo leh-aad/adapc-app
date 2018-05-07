@@ -9,6 +9,8 @@ import SearchScreen from './components/SearchScreen';
 import BadgeScreen from './components/BadgesScreen';
 import DrawerMenu from './components/DrawerMenu';
 import RegisterScreen from './components/RegisterScreen';
+import RatingScreen from './components/RatingScreen';
+
 const TabIcon = ({title}) => {
     // let color = selected ? '#807DFF' : 'black';
     let label = '';
@@ -110,6 +112,11 @@ const RouterComponent = () => {
                     key='details'
                     component={PlaceDetails}
                     title='Detalhes'
+                />
+                <Scene
+                    key='rating'
+                    component={RatingScreen}
+                    title='Avaliação'
                 />
             </Scene>
         </Router>

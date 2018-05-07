@@ -26,7 +26,8 @@ const PlaceItem = (props) => {
     // }
 
     onButtonPress = () => {
-        Actions.push('details', props )
+        // Actions.push('details', props )
+        Actions.rating();
     }
 
     return(
