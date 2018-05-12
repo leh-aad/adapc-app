@@ -1,23 +1,44 @@
 import React, { Component } from 'react';
-import Swiper from 'react-native-deck-swiper'
+import Swiper from 'react-native-deck-swiper';
 import { View, Alert, Text } from 'react-native';
 import { Rating, AirbnbRating } from 'react-native-ratings';
 import { Actions } from 'react-native-router-flux';
+import { connect } from 'react-redux';
+import { ratingChanged } from '../store/actions';
 
 const questions = [
     {
         id: 1,
-        title: 'Ambiente adequado para manobras da cadeira de rodas'
+        title: 'question 01'
     },
     {
         id: 2,
-        title: 'Banheiro acessivel'
+        title: 'question 02'
+    },
+    {
+        id: 3,
+        title: 'question 03'
+    },
+    {
+        id: 4,
+        title: 'question 04'
     }
 ]
 
+const rate = 0;
+
 class RatingScreen extends Component{
 
+    constructor (props) {
+        super(props)
+        this.state = {
+            totalRating: 0
+        }
+        
+    }
+
     renderFinish(){
+        console.log('end',this.state.totalRating)
         Alert.alert(
             'Avaliação concluida!',
             'Agradecemos sua participação',
@@ -25,6 +46,18 @@ class RatingScreen extends Component{
               {text: 'OK', onPress: () => {Actions.main()}},
             ]
           )
+    }
+
+    ratingCompleted(rating){
+        rate = rating;
+    }  
+
+    onSwipe = () => {
+        this.setState({
+            totalRating: this.state.totalRating + rate
+        })
+        rate = 0;
+        console.log(this.state.totalRating);
     }
 
     render(){
@@ -45,20 +78,24 @@ class RatingScreen extends Component{
                                 <Text style={{textAlign: 'center'}}>
                                     {item.title}
                                 </Text>
+
                                 <AirbnbRating
                                     count={3}
-                                    size={35}
+                                    size={30}
+                                    defaultRating={0}
+                                    onFinishRating={this.ratingCompleted}  
+                                    style={{marginTop: 20}} 
                                 />
+                              
                             </View>
                         )
                     }}
                     verticalSwipe={false}
-                    onSwiped={(cardIndex) => {console.log(cardIndex)}}
-                    onSwipedAll={() => {this.renderFinish()}}
                     cardIndex={0}
+                    onSwiped={this.onSwipe}
+                    onSwipedAll={() => {this.renderFinish()}}
                     stackSize= {3}
-                    stackSeparation={20}
-                    animateCardOpacity
+                    stackSeparation={15}
                     backgroundColor='transparent'
                     cardVerticalMargin={10}
                     cardStyle={{height: '80%'}}
@@ -69,4 +106,12 @@ class RatingScreen extends Component{
     }
 }
 
-export default RatingScreen;
+const mapStateToProps = state => {
+    return {
+        rating: state.place.rating
+    }
+}
+
+export default connect(mapStateToProps,{
+    ratingChanged
+})(RatingScreen);
