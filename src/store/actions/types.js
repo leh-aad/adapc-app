@@ -12,3 +12,7 @@ export const GET_DETAILS_SUCCESS = 'get_place_details_success';
 export const GET_PLACE_IMG = 'get_place_img';
 export const GET_NEAR_PLACES = 'get_near_places'; 
 export const GET_NEAR_PLACES_SUCCESS = 'get_near_places_success';
+export const RATING_CHANGED = 'rating_changed';
+export const PUSH_RATING = 'push_rating';
+export const GET_RATING = 'get_rating';
+export const GET_RATING_SUCCESS = 'get_rating_success';

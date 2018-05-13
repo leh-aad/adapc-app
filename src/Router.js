@@ -55,6 +55,7 @@ const RouterComponent = () => {
                 <Stack
                     key='auth'
                     hideNavBar
+                    initial
                 >
                     <Scene
                         key='login'
@@ -70,7 +71,7 @@ const RouterComponent = () => {
                     />
                 </Stack>
                 
-                <Lightbox key="lightbox" initial>
+                <Lightbox key="lightbox" >
                     <Drawer
                         key="drawer"
                         contentComponent={DrawerMenu}

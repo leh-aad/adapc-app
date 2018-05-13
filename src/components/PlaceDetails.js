@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import {
-    Image,
-    Linking
-  } from 'react-native';
+import { Image, Linking } from 'react-native';
 import { 
     Container, 
     Header, 
@@ -20,8 +17,11 @@ import {
     Label,
     Spinner
 } from 'native-base';
+import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
-import { getPlaceDetails, getPlaceImg } from '../store/actions/PlaceActions'; 
+import { getPlaceDetails, getPlaceImg, getRating } from '../store/actions'; 
+
+var _ = require('lodash');
 
 class PlaceDetails extends Component { 
 
@@ -39,6 +39,8 @@ class PlaceDetails extends Component {
             this.props.getPlaceImg({photo_reference});
         }
 
+        const id = this.props.item.id;
+        this.props.getRating(id);
     }
     
     componentWillReceiveProps(){
@@ -63,7 +65,7 @@ class PlaceDetails extends Component {
         }else {
             return(
                 <Badge danger>
-                    <Text style={{ fontSize: 10}}>Fechado</Text>
+                    <Text style={{fontSize: 10}}>Fechado</Text>
                 </Badge>
                 
             );
@@ -71,6 +73,7 @@ class PlaceDetails extends Component {
     }
 
     render(){
+        ///console.log(this.props);
         const { img_url, details, loading } = this.props;
         return (
             
@@ -101,7 +104,7 @@ class PlaceDetails extends Component {
                                         justifyContent: 'center',
                                         alignItems: 'center',
                                         }}>
-                                    <Text>0.0</Text>
+                                    <Text></Text>
                                 </Badge>
                             </Right>
                         </CardItem>
@@ -136,6 +139,13 @@ class PlaceDetails extends Component {
                                 }
                             </Body>
                         </CardItem>
+                        <CardItem>
+                            <Button
+                                onPress={() => {Actions.push('rating', details.result.id)}}
+                            >
+                                <Text>Avaliar</Text>
+                            </Button>
+                        </CardItem>
                     </Card>
                 </Content>
 
@@ -147,14 +157,20 @@ class PlaceDetails extends Component {
 }
 
 const mapStateToProps = state => {
+    
+    const rates = _.map(state.rate, (val,id) =>  {
+       return { ...val, id};
+    }); 
     return{
         details : state.place.details,
         img_url : state.place.img_url,
-        loading : state.place.loading
+        loading : state.place.loading,
+        rates
     };
 };
 
 export default connect(mapStateToProps,{
     getPlaceDetails,
-    getPlaceImg
+    getPlaceImg,
+    getRating
 })(PlaceDetails);

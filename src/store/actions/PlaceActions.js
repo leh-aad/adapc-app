@@ -1,10 +1,11 @@
+import firebase from 'firebase';
 import { Actions } from 'react-native-router-flux';
 import {
     GET_DETAILS, 
     GET_PLACE_IMG,
     GET_NEAR_PLACES,
     GET_NEAR_PLACES_SUCCESS,
-    GET_DETAILS_SUCCESS
+    GET_DETAILS_SUCCESS,
 } from './types';
 var _ = require('lodash');
 
@@ -71,3 +72,4 @@ export const getPlaceImg = ({photo_reference}) => {
         })
     }
 }
+

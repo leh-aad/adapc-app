@@ -4,7 +4,7 @@ import { View, Alert, Text } from 'react-native';
 import { Rating, AirbnbRating } from 'react-native-ratings';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
-import { ratingChanged } from '../store/actions';
+import { ratingChanged, sendRating } from '../store/actions';
 
 const questions = [
     {
@@ -34,7 +34,17 @@ class RatingScreen extends Component{
         this.state = {
             totalRating: 0
         }
-        
+    }
+    
+    componentDidMount(){
+        console.log('props',this.props);
+    }
+
+    onFinish(){
+        console.log('finish')
+        const id = this.props.data;
+        const rating = this.state.totalRating / questions.length;
+        this.props.sendRating({rating,id});
     }
 
     renderFinish(){
@@ -46,6 +56,7 @@ class RatingScreen extends Component{
               {text: 'OK', onPress: () => {Actions.main()}},
             ]
           )
+        this.onFinish();
     }
 
     ratingCompleted(rating){
@@ -113,5 +124,5 @@ const mapStateToProps = state => {
 }
 
 export default connect(mapStateToProps,{
-    ratingChanged
+    ratingChanged, sendRating
 })(RatingScreen);
