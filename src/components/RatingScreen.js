@@ -9,19 +9,27 @@ import { ratingChanged, sendRating } from '../store/actions';
 const questions = [
     {
         id: 1,
-        title: 'question 01'
+        title: 'Caso haja estacionamento, o mesmo possui vagas reservadas devidamente sinalizadas e de rota acessível'
     },
     {
         id: 2,
-        title: 'question 02'
+        title: 'A área dos ponto de entrada e saída do local fornece rotas acessíveis (Rampas, calçamento rebaixado, deslocamento sem obstáculos, seguro)'
     },
     {
         id: 3,
-        title: 'question 03'
+        title: 'As áreas de circulação do espaço permitem a movimentação segura e confortável, e a execução de manobras equilibradas de pessoas em cadeira de rodas.'
     },
     {
         id: 4,
-        title: 'question 04'
+        title: 'O local dispõe de sanitários adaptados, contendo barras de apoio (e outras medidas de segurança) e lavatório em altura ideal para o cadeirante.'
+    },
+    {
+        id: 5,
+        title: 'Caso de  edificações, o acesso a outros andares pode ser feito por meio de rampas e ou elevadores'
+    },
+    {
+        id: 6,
+        title: 'Os mobiliários do local, como mesa, balcões, telefones, entre outros, estão em altura acessível para o cadeirante'
     }
 ]
 
@@ -36,19 +44,15 @@ class RatingScreen extends Component{
         }
     }
     
-    componentDidMount(){
-        console.log('props',this.props);
-    }
 
     onFinish(){
         console.log('finish')
         const id = this.props.data;
-        const rating = this.state.totalRating / questions.length;
+        const rating = (this.state.totalRating / questions.length).toFixed(2);
         this.props.sendRating({rating,id});
     }
 
     renderFinish(){
-        console.log('end',this.state.totalRating)
         Alert.alert(
             'Avaliação concluida!',
             'Agradecemos sua participação',
@@ -68,7 +72,6 @@ class RatingScreen extends Component{
             totalRating: this.state.totalRating + rate
         })
         rate = 0;
-        console.log(this.state.totalRating);
     }
 
     render(){

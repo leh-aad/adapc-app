@@ -3,6 +3,7 @@ import {
   Text,
   View,
   FlatList,
+  TouchableOpacity
 } from 'react-native';
 import { Spinner } from 'native-base';
 import { connect } from 'react-redux';
@@ -16,7 +17,7 @@ class PlaceList extends Component {
   componentWillMount(){
     this.props.getNearPlaces();
   }
-
+  
   renderFlatList = () => {
     if(this.props.place_list){
       return(

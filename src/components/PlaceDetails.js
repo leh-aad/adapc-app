@@ -17,6 +17,7 @@ import {
     Label,
     Spinner
 } from 'native-base';
+import firebase from 'firebase';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import { getPlaceDetails, getPlaceImg, getRating } from '../store/actions'; 
@@ -29,18 +30,17 @@ class PlaceDetails extends Component {
         place_details: null,
         img: ''
     }
-
-    componentDidMount(){
+    componentWillMount(){
+        const id = this.props.item.id;
+        this.props.getRating(id);
+        
         const place_id = this.props.item.place_id;
         this.props.getPlaceDetails({place_id});
-    
+        
         if(this.props.item.photos){
             const photo_reference = this.props.item.photos[0].photo_reference;
             this.props.getPlaceImg({photo_reference});
         }
-
-        const id = this.props.item.id;
-        this.props.getRating(id);
     }
     
     componentWillReceiveProps(){
@@ -74,7 +74,7 @@ class PlaceDetails extends Component {
 
     render(){
         ///console.log(this.props);
-        const { img_url, details, loading } = this.props;
+        const { img_url, details, loading, rating } = this.props;
         return (
             
             <Container>
@@ -104,7 +104,7 @@ class PlaceDetails extends Component {
                                         justifyContent: 'center',
                                         alignItems: 'center',
                                         }}>
-                                    <Text></Text>
+                                    <Text>{rating}</Text>
                                 </Badge>
                             </Right>
                         </CardItem>
@@ -158,14 +158,11 @@ class PlaceDetails extends Component {
 
 const mapStateToProps = state => {
     
-    const rates = _.map(state.rate, (val,id) =>  {
-       return { ...val, id};
-    }); 
     return{
         details : state.place.details,
         img_url : state.place.img_url,
         loading : state.place.loading,
-        rates
+        rating : state.rate.rating
     };
 };
 

@@ -1,4 +1,5 @@
 import firebase from 'firebase';
+import b64 from 'base-64';
 import {
     RATING_CHANGED,
     PUSH_RATING,
@@ -16,18 +17,15 @@ export const ratingChanged = (rating) => {
 export const sendRating = ({rating, id}) => {
     return(dispatch) => {
         dispatch({type: PUSH_RATING});
-        firebase.database().ref(`/rates/${id}`).push({rating});
+        firebase.database().ref("rates").child(id).set(rating);
     }
 }
 
-export const getRating = ({id}) => { 
-    const rate = {};
+export const getRating = (id) => {  
     return(dispatch) => {
-        dispatch({type: GET_RATING});
         firebase.database().ref(`/rates/${id}`)  
-        .once('value')
-        .then(snap =>{
-            console.log(snap.val())
+        .on('value', snap => {
+            dispatch({type: GET_RATING_SUCCESS, payload: snap.val()})
         })
     }
 }
