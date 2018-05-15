@@ -46,10 +46,11 @@ class RatingScreen extends Component{
     
 
     onFinish(){
-        console.log('finish')
-        const id = this.props.data;
-        const rating = (this.state.totalRating / questions.length).toFixed(2);
-        this.props.sendRating({rating,id});
+        const id = this.props.id;
+        const actualRate = this.props.rate;
+        let rating = (this.state.totalRating / questions.length).toFixed(2);
+        let newRate = (actualRate + rating)/2;
+        this.props.sendRating({newRate,id});
     }
 
     renderFinish(){
@@ -75,6 +76,7 @@ class RatingScreen extends Component{
     }
 
     render(){
+        console.log(this.props);
         return(
             <View style={{flex: 1}}>
                 <Swiper

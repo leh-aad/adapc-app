@@ -141,7 +141,7 @@ class PlaceDetails extends Component {
                         </CardItem>
                         <CardItem>
                             <Button
-                                onPress={() => {Actions.push('rating', details.result.id)}}
+                                onPress={() => {Actions.push('rating', {rate: this.props.rating, id: details.result.id})}}
                             >
                                 <Text>Avaliar</Text>
                             </Button>
