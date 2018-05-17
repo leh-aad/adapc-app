@@ -9,7 +9,10 @@ import {
     REGISTER_USER,
     REGISTER_SUCCESS,
     REGISTER_FAIL,
-    LOGOUT_USER
+    LOGOUT_USER,
+    REGISTER_FAIL_PASSWORD,
+    REGISTER_FAIL_INVALID_EMAIL,
+    REGISTER_FAIL_EMAIL_IN_USE
 } from './types';
 
 export const emailChanged = (text) => {
@@ -60,16 +63,25 @@ const loginUserFail = (dispatch) => {
     });
 }
 
-export const registerUser = ({email, password}) => {
+export const registerUser = ({email, password, name}) => {
     return(dispatch) =>{
         dispatch({type: REGISTER_USER});
-
+        
         firebase.auth().createUserWithEmailAndPassword(email,password)
             .then(user =>{
+                console.log(user);
                 dispatch({type: REGISTER_SUCCESS, payload: user})
             })
             .catch((error) =>{
-                dispatch({type: REGISTER_FAIL});
+                if(error.code == 'auth/weak-password'){
+                    dispatch({type: REGISTER_FAIL_PASSWORD});
+                }
+                if(error.code == 'auth/invalid_email'){
+                    dispatch({type: REGISTER_FAIL_INVALID_EMAIL});
+                }
+                if(error.code == 'auth/email-already-in-use'){
+                    dispatch({type: REGISTER_FAIL_EMAIL_IN_USE});
+                }    
             })
     }
 }

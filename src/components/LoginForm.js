@@ -56,9 +56,7 @@ class LoginForm extends Component {
 
   renderError(){
     if(this.props.error){
-      return(
-        <Text>{this.props.error}</Text>
-      );
+      alert(this.props.error);
     }
   }
 

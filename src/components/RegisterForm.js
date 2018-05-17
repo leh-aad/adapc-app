@@ -73,11 +73,18 @@ class RegisterForm extends Component {
     }
   }
 
+  renderErrorAlert(){
+    if(this.props.error){
+      alert(this.props.error);
+    }
+  }
+
   render() {
     return (
       <Container style={{ alignItems: 'center' }}> 
         <Content style={{width : '80%', marginTop: 10}}> 
           {this.renderSuccessAlert()}
+          {this.renderErrorAlert()}
           <Form>
             <Item 
               last 

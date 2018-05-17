@@ -7,7 +7,10 @@ import {
     REGISTER_USER,
     REGISTER_SUCCESS,
     REGISTER_FAIL,
-    LOGOUT_USER
+    LOGOUT_USER,
+    REGISTER_FAIL_PASSWORD,
+    REGISTER_FAIL_INVALID_EMAIL,
+    REGISTER_FAIL_EMAIL_IN_USE
 } from '../actions/types';
 
 const INITIAL_STATE = { 
@@ -36,6 +39,12 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, loading: true, error: ''};
         case REGISTER_SUCCESS:
             return { ...state, user: action.payload, error: '', loading: false, success: true};
+        case REGISTER_FAIL_PASSWORD:
+            return { ...state, error: 'A senha precisa ter no mínimo 6 caracteres', password: '', loading: false};
+        case REGISTER_FAIL_INVALID_EMAIL:
+            return { ...state, error: 'Email inválido, tente novamente.', email: '', loading: false};
+        case REGISTER_FAIL_EMAIL_IN_USE:
+            return { ...state, error: 'Email já cadastrado', email: '', loading: false};
         case LOGOUT_USER:
             return { ...state, email: '', password: '', user: null}    
         default:
