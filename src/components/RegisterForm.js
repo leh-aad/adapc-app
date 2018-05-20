@@ -40,7 +40,7 @@ class RegisterForm extends Component {
     
     return (
       <Button
-        rounded
+        
         onPress={this.onButtonPress.bind(this)}
         full  
         style={{ 
@@ -54,14 +54,6 @@ class RegisterForm extends Component {
         <Text> Cadastrar </Text>
       </Button>
     );
-  }
-
-  renderError(){
-    if(this.props.error){
-      return(
-        <Text>{this.props.error}</Text>
-      );
-    }
   }
 
   renderSuccessAlert(){
@@ -78,7 +70,7 @@ class RegisterForm extends Component {
 
   renderErrorAlert(){
     if(this.props.error){
-      alert(this.props.error);
+        alert(this.props.error);
     }
   }
 
@@ -87,22 +79,21 @@ class RegisterForm extends Component {
       <Container style={{ alignItems: 'center' }}> 
         <Content style={{width : '80%', marginTop: 10}}> 
           {this.renderSuccessAlert()}
+          {this.renderErrorAlert()}
           <Form>
             <Item 
-              last 
-              rounded 
-              style={{ backgroundColor: 'rgb(255,255,255)', marginTop: 10, borderRadius: 20 }}
+              last
+              style={{ backgroundColor: 'rgb(255,255,255)', marginTop: 10, borderRadius: 10, height: 40 }}
             >
               <Input
-                placeholder="Name"
+                placeholder="Nome"
                 value={this.props.name}
                 onChangeText={this.onNameChange.bind(this)}
               />
             </Item> 
             <Item 
-              last 
-              rounded 
-              style={{ backgroundColor: 'rgb(255,255,255)', marginTop: 10, borderRadius: 20 }}
+              last
+              style={{ backgroundColor: 'rgb(255,255,255)', marginTop: 10, borderRadius: 10, height: 40 }}
             >
               <Input
                 placeholder="Email"
@@ -112,14 +103,9 @@ class RegisterForm extends Component {
                 keyboardType='email-address'
               />
             </Item> 
-            <Item 
-              rounded 
+            <Item
               last 
-              style={{ 
-                backgroundColor: 'rgb(255,255,255)', 
-                marginTop: 10, 
-                borderRadius: 20 
-              }}
+              style={{ backgroundColor: 'rgb(255,255,255)', marginTop: 10, borderRadius: 10, height: 40 }}
             >
               <Input 
                 placeholder="Senha"
@@ -128,7 +114,7 @@ class RegisterForm extends Component {
                 value={this.props.password}
               />
             </Item>
-            {this.renderButtonOrSpinner()}  
+            {this.renderButtonOrSpinner()} 
           </Form>
         </Content>
       </Container>

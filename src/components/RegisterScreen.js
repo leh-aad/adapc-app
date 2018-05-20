@@ -8,10 +8,16 @@ class RegisterScreen extends Component {
 
     render() {
       return ( 
-        <Container style={{backgroundColor : 'white', flex: 1}}>
-            <Content>
-                <RegisterForm />
+        <Container>
+          {/* <LinearGradient 
+            colors={['#B8C2E5','#415ECC']} 
+            locations={[0, 1]}
+            style={{flex:1}}
+          > */}
+            <Content contentContainerStyle={{marginTop: 20}}>
+                <RegisterForm/>
             </Content>
+          {/* </LinearGradient> */}
         </Container>
       );
     }

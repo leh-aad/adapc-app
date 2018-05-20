@@ -7,6 +7,7 @@ export const LOGIN_FAIL = 'login_fail';
 export const LOGOUT_USER = 'logout_user';
 export const REGISTER_USER = 'register_user'
 export const REGISTER_SUCCESS = 'register_success';
+export const REGISTER_FAIL = 'register_fail';
 export const REGISTER_FAIL_PASSWORD = 'register_fail_password';
 export const REGISTER_FAIL_INVALID_EMAIL = 'register_fail_invalid_email';
 export const REGISTER_FAIL_EMAIL_IN_USE = 'register_fail_email_already_in_use';

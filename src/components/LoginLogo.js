@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Content, Container, H1 } from 'native-base';
+import { Content, Container, H1, Text } from 'native-base';
 
 class Logo extends Component {
  
@@ -15,7 +15,8 @@ class Logo extends Component {
                 }}
         >
             <Content>
-                <H1>[ LOGO ]</H1>
+                <H1 style={{color: '#807DFF', fontSize: 30, fontWeight: 'bold'}}>Adapc</H1>
+                <Text style={{color: '#807DFF', fontSize: 16}}>Avaliação de acessibilidade para cadeirantes</Text>
             </Content>
         </Container>
       );

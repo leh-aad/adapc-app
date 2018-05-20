@@ -80,7 +80,8 @@ export const registerUser = ({email, password, name}) => {
             .then(user => {
                 firebase.database().ref('users/' + user.uid).set({
                     name: name,
-                    points: 0
+                    points: 0,
+                    loginCount: 0
                 })
                 .then(
                     dispatch({type: REGISTER_SUCCESS, payload: user})
@@ -90,12 +91,14 @@ export const registerUser = ({email, password, name}) => {
                 if(error.code == 'auth/weak-password'){
                     dispatch({type: REGISTER_FAIL_PASSWORD});
                 }
-                if(error.code == 'auth/invalid_email'){
+                else if(error.code == 'auth/invalid_email'){
                     dispatch({type: REGISTER_FAIL_INVALID_EMAIL});
                 }
-                if(error.code == 'auth/email-already-in-use'){
+                else if(error.code == 'auth/email-already-in-use'){
                     dispatch({type: REGISTER_FAIL_EMAIL_IN_USE});
-                }    
+                }else{
+                    dispatch({type: REGISTER_FAIL})
+                }  
             })
     };
 };

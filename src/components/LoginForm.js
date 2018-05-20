@@ -11,7 +11,8 @@ import { Content,
   Button,
   Spinner, 
   Text,
-  Toast 
+  Toast, 
+  Icon
 } from 'native-base';
 
 import { Col, Grid } from 'react-native-easy-grid';
@@ -56,7 +57,8 @@ class LoginForm extends Component {
 
   renderError(){
     if(this.props.error){
-      alert(this.props.error);
+      return(
+      <Text style={{color: 'red', textAlign: 'center', fontSize: 15}}><Icon style={{color: 'red', fontSize: 15}}name="exclamation-triangle" type="FontAwesome"/> {this.props.error}</Text>);
     }
   }
 
@@ -65,6 +67,7 @@ class LoginForm extends Component {
       <View style={{ flex: 1, alignItems: 'center' }}> 
         <Content style={{ maxWidth: '80%' }}> 
           <Form>
+            {this.renderError()}
             <Item 
               last 
               rounded 
@@ -93,7 +96,7 @@ class LoginForm extends Component {
                 value={this.props.password}
               />
             </Item>
-            {this.renderButtonOrSpinner()}  
+            {this.renderButtonOrSpinner()}
           </Form>
           
           <Grid style={{marginTop:10}}>

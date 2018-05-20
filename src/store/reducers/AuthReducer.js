@@ -30,11 +30,11 @@ export default (state = INITIAL_STATE, action) => {
     console.log(action);
     switch(action.type){
         case EMAIL_CHANGED: 
-            return { ...state, email: action.payload };
+            return { ...state, email: action.payload, error: '' };
         case PASSWORD_CHANGED:
-            return { ...state, password: action.payload };
+            return { ...state, password: action.payload, error: '' };
         case NAME_CHANGED:
-            return { ...state, name: action.payload};
+            return { ...state, name: action.payload, error: ''};
         case LOGIN_USER:
             return { ...state, loading: true, error: '', success: false};
         case LOGIN_SUCCESS:
@@ -45,6 +45,8 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, loading: true, error: ''};
         case REGISTER_SUCCESS:
             return { ...state, user: action.payload, error: '', loading: false, success: true};
+        case REGISTER_FAIL:
+            return { ...state, error: 'Erro, tente novamente', password:'', email: '', loading:false};
         case REGISTER_FAIL_PASSWORD:
             return { ...state, error: 'A senha precisa ter no mínimo 6 caracteres', password: '', loading: false};
         case REGISTER_FAIL_INVALID_EMAIL:
