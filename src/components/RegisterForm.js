@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Alert } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
-import { emailChanged, passwordChanged, registerUser } from '../store/actions';
+import { emailChanged, passwordChanged, nameChanged, registerUser } from '../store/actions';
 import firebase from 'firebase';
 import { Content, 
   Form, 
@@ -25,9 +25,12 @@ class RegisterForm extends Component {
     this.props.passwordChanged(text);
   }
 
+  onNameChange(text){
+    this.props.nameChanged(text);
+  }
   onButtonPress() {
-    const { email, password } = this.props;
-    this.props.registerUser({email,password});
+    const { email, password, name } = this.props;
+    this.props.registerUser({email,password,name});
   }
   
   renderButtonOrSpinner() {
@@ -84,8 +87,18 @@ class RegisterForm extends Component {
       <Container style={{ alignItems: 'center' }}> 
         <Content style={{width : '80%', marginTop: 10}}> 
           {this.renderSuccessAlert()}
-          {this.renderErrorAlert()}
           <Form>
+            <Item 
+              last 
+              rounded 
+              style={{ backgroundColor: 'rgb(255,255,255)', marginTop: 10, borderRadius: 20 }}
+            >
+              <Input
+                placeholder="Name"
+                value={this.props.name}
+                onChangeText={this.onNameChange.bind(this)}
+              />
+            </Item> 
             <Item 
               last 
               rounded 
@@ -127,11 +140,12 @@ const mapStateToProps = state => {
   return {
     email: state.auth.email,
     password: state.auth.password,
+    name: state.auth.name,
     error: state.auth.error,
     loading: state.auth.loading,
     success: state.auth.success
   };
 };
 export default connect(mapStateToProps, {
-  emailChanged, passwordChanged,registerUser
+  emailChanged, passwordChanged, nameChanged, registerUser
 })(RegisterForm);

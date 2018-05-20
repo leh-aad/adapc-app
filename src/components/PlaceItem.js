@@ -44,7 +44,7 @@ class PlaceItem extends Component {
                 </Left>
                 <Right>
                     <Button transparent onPress={this.onButtonPress}>
-                    <Text>Avaliar</Text>
+                    <Text>Detalhes</Text>
                     </Button>
                 </Right>
                 </CardItem>

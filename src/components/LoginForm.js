@@ -93,7 +93,6 @@ class LoginForm extends Component {
                 value={this.props.password}
               />
             </Item>
-            {this.renderError()}
             {this.renderButtonOrSpinner()}  
           </Form>
           

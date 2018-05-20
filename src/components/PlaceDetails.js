@@ -15,7 +15,8 @@ import {
     Right,
     Badge,
     Label,
-    Spinner
+    Spinner,
+    Separator
 } from 'native-base';
 import firebase from 'firebase';
 import { Actions } from 'react-native-router-flux';
@@ -91,25 +92,33 @@ class PlaceDetails extends Component {
                             />
                         </CardItem>
                         <CardItem> 
-                            <Left>
-                                <Text style={{fontSize: 16, color: 'grey'}}>{details.result.name}</Text>   
+                            <Left style={{marginLeft: 0, paddingLeft: 0}}>
+                                <Text style={{fontSize: 16, color: 'grey', fontWeight: 'bold'}}>{details.result.name}</Text>   
                             </Left>
                             <Right> 
-                                <Badge 
-                                    info 
+                                <Badge
                                     style={{
                                         width: 50,  
                                         height: 50, 
                                         borderRadius: 50,
+                                        borderColor: '#807DFF',
+                                        borderWidth: 1.1,
+                                        borderStyle: 'solid',
                                         justifyContent: 'center',
                                         alignItems: 'center',
-                                        }}>
-                                    <Text>{rating}</Text>
+                                        backgroundColor: 'white'
+                                        }}
+                                    >
+                                    <Text style={{color: '#807DFF'}}>{rating}</Text>
                                 </Badge>
                             </Right>
                         </CardItem>
+                        <Separator></Separator>
                         <CardItem>
-                            <Text note>{details.result.formatted_address}</Text>
+                            <Left>
+                                <Icon style={{fontSize: 20, color: 'red'}} type="MaterialIcons" name="place"/>
+                                <Text note>{details.result.formatted_address}</Text>
+                            </Left>
                         </CardItem>
                         <CardItem>
                             <Left>
@@ -139,12 +148,13 @@ class PlaceDetails extends Component {
                                 }
                             </Body>
                         </CardItem>
-                        <CardItem>
-                            <Button
-                                onPress={() => {Actions.push('rating', {rate: this.props.rating, id: details.result.id})}}
-                            >
-                                <Text>Avaliar</Text>
-                            </Button>
+                        <Separator></Separator>
+                        <CardItem button bordered
+                            onPress={() => {Actions.push('rating', {rate: this.props.rating, id: details.result.id})}}
+                        >
+                            <Body>
+                                <Text style={{color: '#807DFF'}}>Avaliar acessibilidade</Text>
+                            </Body>
                         </CardItem>
                     </Card>
                 </Content>

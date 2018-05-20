@@ -14,9 +14,10 @@ export const ratingChanged = (rating) => {
     }
 }
 
-export const sendRating = ({rating, id}) => {
+export const sendRating = (rating, id) => {
     return(dispatch) => {
         dispatch({type: PUSH_RATING});
+        console.log(rating);
         firebase.database().ref("rates").child(id).set(rating);
     }
 }

@@ -47,10 +47,17 @@ class RatingScreen extends Component{
 
     onFinish(){
         const id = this.props.id;
-        const actualRate = this.props.rate;
         let rating = (this.state.totalRating / questions.length).toFixed(2);
-        let newRate = (actualRate + rating)/2;
-        this.props.sendRating({newRate,id});
+        console.log(this.props.rate);
+        
+        if(this.props.rate){
+            let newRate = ((Number(this.props.rate) + Number(rating))/2).toFixed(2);
+            console.log('if', newRate,id);
+            this.props.sendRating(newRate,id);
+        }else{
+            console.log('else', rating, id);
+            this.props.sendRating(rating,id);
+        }
     }
 
     renderFinish(){
@@ -77,18 +84,21 @@ class RatingScreen extends Component{
 
     render(){
         return(
-            <View style={{flex: 1}}>
+            <View style={{flex: 1 }}>
                 <Swiper
                     cards={questions}
                     renderCard={(item) => {
                         return (
                             <View style={{
                                 flex: 1,
+                                alignItems: 'center',
+                                justifyContent: 'center',
                                 borderRadius: 10,
                                 borderWidth: 2,
                                 borderColor: "#E8E8E8",
                                 backgroundColor: "white",
-                                padding: 20
+                                padding: 20,
+                                height: 80
                             }}>
                                 <Text style={{textAlign: 'center'}}>
                                     {item.title}
@@ -99,9 +109,10 @@ class RatingScreen extends Component{
                                     size={30}
                                     defaultRating={0}
                                     onFinishRating={this.ratingCompleted}  
-                                    style={{marginTop: 20}} 
+                                    style={{marginTop: 100}} 
                                 />
-                              
+                            
+                            <Text style={{display: 'flex', alignItems: 'flex-end', alignSelf: 'flex-end'}}>Pular ></Text>
                             </View>
                         )
                     }}

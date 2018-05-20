@@ -1,5 +1,6 @@
 export const EMAIL_CHANGED = 'email_changed';
 export const PASSWORD_CHANGED = 'password_changed';
+export const NAME_CHANGED = 'name_changed';
 export const LOGIN_USER = 'login_user';
 export const LOGIN_SUCCESS = 'login_success';
 export const LOGIN_FAIL = 'login_fail';
@@ -18,3 +19,4 @@ export const RATING_CHANGED = 'rating_changed';
 export const PUSH_RATING = 'push_rating';
 export const GET_RATING = 'get_rating';
 export const GET_RATING_SUCCESS = 'get_rating_success';
+export const GET_USER_DATA = 'get_user';

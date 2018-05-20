@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { Image, StatusBar } from "react-native";
-import { Container, Content, Text, List, ListItem } from "native-base";
-import { logoutUser } from '../store/actions';
+import { Image, View, TouchableOpacity } from "react-native";
+import { Container, Content, Text, List, ListItem, Left, Icon, Body, Right, Separator } from "native-base";
+import { logoutUser, getUserData } from '../store/actions';
 import { connect } from 'react-redux';
-const routes = ["Perfil", "Sair"];
 
 class DrawerMenu extends Component {
 
@@ -11,41 +10,45 @@ class DrawerMenu extends Component {
       if(route == "Sair"){
           return this.props.logoutUser();
       }
-  }    
+  }
 
+  componentWillMount(){
+    this.props.getUserData();
+  }
+    
   render() {
     return (
         <Container>
-            <Content>
-            <Image
-                source={{
-                uri: "./drawer_cover"
-                }}
-                style={{
-                height: 120,
-                alignSelf: "stretch",
-                justifyContent: "center",
-                alignItems: "center"
-                }}>
-            </Image>
-            <List
-                dataArray={routes}
-                renderRow={data => {
-                return (
-                    <ListItem
-                        button
-                        onPress={()=>this.onPressAction(data)}
-                    >
-                        <Text>{data}</Text>
-                    </ListItem>
-                );
-                }}
-            />
+            <Content padder>
+                <List style={{marginTop: 30}}>
+                    <TouchableOpacity>
+                        <ListItem icon>
+                            <Body>
+                                {this.props.userData && <Text>{this.props.userData.name}</Text> }
+                            </Body>
+                        </ListItem>
+                    </TouchableOpacity>
+                    <ListItem icon>
+                        <Left>
+                            <Icon name="ios-log-out" style={{fontSize: 25}}/>
+                        </Left>
+                        <Body>
+                            <Text>Sair</Text>
+                        </Body>
+                    </ListItem>       
+                </List>
             </Content>
         </Container>
     );
   }
 }
-export default connect(null, {
-    logoutUser
+
+const mapStateToProps = state => {
+    return {
+        userData: state.auth.userData        
+   }
+}
+
+export default connect(mapStateToProps,{
+    logoutUser, getUserData,
   })(DrawerMenu);
