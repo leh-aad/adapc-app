@@ -65,7 +65,7 @@ class RatingScreen extends Component{
             'Avaliação concluida!',
             'Agradecemos sua participação',
             [
-              {text: 'OK', onPress: () => {Actions.main()}},
+              {text: 'OK', onPress: () => {Actions.pop()}},
             ]
           )
         this.onFinish();
