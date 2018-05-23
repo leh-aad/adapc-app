@@ -99,12 +99,12 @@ const RouterComponent = () => {
                                     title="Pesquisar"
                                     icon={TabIcon}
                                 />
-                                {/* <Scene
+                                <Scene
                                     key="badgeScreen"
                                     component={BadgeScreen}
                                     title="Medalhas"
                                     icon={TabIcon}
-                                /> */}
+                                />
                             </Tabs>
                         </Scene>
                     </Drawer>

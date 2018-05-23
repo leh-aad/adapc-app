@@ -11,10 +11,6 @@ class DrawerMenu extends Component {
           return this.props.logoutUser();
       }
   }
-
-  componentWillMount(){
-    this.props.getUserData();
-  }
     
   render() {
     return (

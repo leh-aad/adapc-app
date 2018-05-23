@@ -8,14 +8,27 @@ import {
 import { Spinner } from 'native-base';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux'
-import { getNearPlaces } from '../store/actions';
+import { getNearPlaces, updateLoginCount } from '../store/actions';
 import PlaceItem from './PlaceItem';
+import { FIRST_LOGIN, FIFTH_LOGIN } from '../store/actions/types';
 var _ = require('lodash');
 
 class PlaceList extends Component {
 
   componentWillMount(){
-    this.props.getNearPlaces();
+    this.props.getNearPlaces();   
+  }
+
+  medal(){
+    const { medal } = this.props;
+    switch(medal){
+      case FIRST_LOGIN:
+        console.log('1st login')
+      case FIFTH_LOGIN:
+        console.log('5th login')
+      default:
+        return;
+    } 
   }
   
   renderFlatList = () => {
@@ -35,6 +48,7 @@ class PlaceList extends Component {
   }
 
   render() {
+    this.medal();
     return (
       <View>
           {this.props.loading &&
@@ -49,10 +63,12 @@ class PlaceList extends Component {
 const mapStateToProps = state => {
   return{
     place_list: state.place.place_list,
-    loading: state.place.loading
+    loading: state.place.loading,
+    userData: state.auth.userData,
+    medal: state.game.medal  
   };
 };
 
 export default connect(mapStateToProps,{
-  getNearPlaces
+  getNearPlaces, updateLoginCount
 })(PlaceList);

@@ -16,6 +16,9 @@ import {
     NAME_CHANGED,
     GET_USER_DATA
 } from './types';
+import { updateLoginCount, gameAction } from '.';
+
+const data = null;
 
 export const emailChanged = (text) => {
     return{
@@ -46,13 +49,15 @@ export const loginUser = ({email,password}) => {
             .then(user => {
                 dispatch({type: LOGIN_SUCCESS, payload: user});
                 Actions.main();
+                
             })
             .catch( (error) => {                
                 console.log(error);
                 loginUserFail(dispatch);
             }); 
+            dispatch(getUserData());
+            dispatch(gameAction());
     };
-    
 };
 
 export const logoutUser = () => {
@@ -81,7 +86,8 @@ export const registerUser = ({email, password, name}) => {
                 firebase.database().ref('users/' + user.uid).set({
                     name: name,
                     points: 0,
-                    loginCount: 0
+                    loginCount: 0,
+                    ratingCount: 0
                 })
                 .then(
                     dispatch({type: REGISTER_SUCCESS, payload: user})
@@ -106,13 +112,9 @@ export const registerUser = ({email, password, name}) => {
 export const getUserData = () => {
     var user = firebase.auth().currentUser;
     return(dispatch) => {
-        console.log("action",user.uid);
         firebase.database().ref(`/users/${user.uid}`)
         .on('value', snap => {
-            console.log("snap",snap.val());
             dispatch({ type: GET_USER_DATA, payload: snap.val()})
         })
     }
-        
-    
 }
