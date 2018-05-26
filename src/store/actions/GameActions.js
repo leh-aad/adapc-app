@@ -8,9 +8,9 @@ export const gameAction = () => {
         .once('value', snap => {
             if(snap.val().loginCount == 0){
                 dispatch({type: FIRST_LOGIN, payload: snap.val().loginCount});
-            }if(snap.val().loginCount == 4){
+            }else if(snap.val().loginCount == 4){
                 dispatch({type: FIFTH_LOGIN, payload: snap.val().loginCount});
-            }if(snap.val().loginCount == 9){
+            }else if(snap.val().loginCount == 9){
                 dispatch({type: TENTH_LOGIN, payload: snap.val().loginCount});
             }
             else{
@@ -25,11 +25,11 @@ export const updateLoginCount = (count,points,uid) => {
     return(dispatch) => {
         firebase.database().ref('users/' + uid).update({
             loginCount: count + 1,
-            points: points + 25
+            //points: points + 25
         })
-        dispatch(checkPoints(points+25));
+        //dispatch(checkPoints(points+25));
         dispatch({type: UPDATE_LOGIN_COUNT});
-        dispatch({type: UPDATE_POINTS_25});
+        //dispatch({type: UPDATE_POINTS_25});
         
     }
 }
