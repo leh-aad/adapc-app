@@ -1,5 +1,4 @@
 import firebase from 'firebase';
-import b64 from 'base-64';
 import {
     RATING_CHANGED,
     PUSH_RATING,

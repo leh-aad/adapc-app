@@ -16,6 +16,7 @@ import {
     NAME_CHANGED,
     GET_USER_DATA
 } from './types';
+import Badges from '../../assets/index';
 import { updateLoginCount, gameAction } from '.';
 
 const data = null;
@@ -48,6 +49,8 @@ export const loginUser = ({email,password}) => {
         firebase.auth().signInWithEmailAndPassword(email,password)
             .then(user => {
                 dispatch({type: LOGIN_SUCCESS, payload: user});
+                dispatch(getUserData());
+                dispatch(gameAction());
                 Actions.main();
                 
             })
@@ -55,8 +58,7 @@ export const loginUser = ({email,password}) => {
                 console.log(error);
                 loginUserFail(dispatch);
             }); 
-            dispatch(getUserData());
-            dispatch(gameAction());
+
     };
 };
 
@@ -87,7 +89,8 @@ export const registerUser = ({email, password, name}) => {
                     name: name,
                     points: 0,
                     loginCount: 0,
-                    ratingCount: 0
+                    ratingCount: 0,
+                    badges: 0
                 })
                 .then(
                     dispatch({type: REGISTER_SUCCESS, payload: user})
