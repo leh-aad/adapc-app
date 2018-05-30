@@ -38,8 +38,10 @@ class BadgesScreen extends Component{
 
 
   componentWillReceiveProps(next){
-    this.setState({badges: next.userData.badges})
    //this.props.getUserRank(this.props.leaderboard, this.props.userData.name);
+    setTimeout(() => {
+      this.setState({badges: this.props.userData.badges})
+    }, 1000);  
   }
   
   render(){

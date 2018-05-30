@@ -9,7 +9,7 @@ class Logo extends Component {
       return ( 
         <Container 
           style={{ 
-                  maxHeight: '30%',
+                  maxHeight: '25%',
                   padding: 50,
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -21,8 +21,8 @@ class Logo extends Component {
                   source={require('../assets/logo2.png')}
                   style={{height: 100, width: 100, alignSelf: 'center'}}
                 /> */}
-                <H1 style={{color: '#FFFFFF', fontSize: 30, fontWeight: 'bold'}}>Adapc</H1>
-                {/* <Text style={{color: '#FFFFFF', fontSize: 16}}>Avaliação de acessibilidade para cadeirantes</Text> */}
+                <H1 style={{color: '#FFFFFF',textAlign: 'center', fontSize: 30, fontWeight: 'bold'}}>Adapc</H1>
+                <Text style={{color: '#FFFFFF', textAlign: 'center',fontSize: 12}}>Avaliação de acessibilidade para cadeirantes</Text>
             </Content>
         </Container>
       );

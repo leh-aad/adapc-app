@@ -78,27 +78,27 @@ export const checkPoints = (points) => {
         switch(points){
             case 100:
                 dispatch({type: POINTS_100})
-                badge = {name: POINTS_100, path: '100p'}
+                badge = {name: POINTS_100, path: 'p100'}
                 dispatch(updateBadgeList(badge))
                 break;
             case 250:
                 dispatch({type: POINTS_250})
-                badge = {name: POINTS_250, path: '250p'}
+                badge = {name: POINTS_250, path: 'p250'}
                 dispatch(updateBadgeList(badge))
                 break;
             case 500:
                 dispatch({type: POINTS_500})
-                badge = {name: POINTS_500, path: '500p'}
+                badge = {name: POINTS_500, path: 'p500'}
                 dispatch(updateBadgeList(badge))
                 break;
             case 750:
                 dispatch({type: POINTS_750})
-                badge = {name: POINTS_750, path: '750p'}
+                badge = {name: POINTS_750, path: 'p750'}
                 dispatch(updateBadgeList(badge))
                 break;
             case 1000:
                 dispatch({type: POINTS_1000})
-                badge = {name: POINTS_1000, path: '1000p'}
+                badge = {name: POINTS_1000, path: 'p1000'}
                 dispatch(updateBadgeList(badge))
                 break;
             default:
