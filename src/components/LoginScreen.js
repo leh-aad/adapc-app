@@ -9,17 +9,17 @@ class LoginScreen extends Component {
 
     render() {
       return ( 
-        <Container>
-          <LinearGradient 
+        <Container style={{backgroundColor: '#807DFF'}}>
+          {/* <LinearGradient 
             colors={['#FFFFFF', '#B8C2E5', '#415ECC']} 
             locations={[0, 0.45, 1]}
             style={styles.linearGradient}
-          >
+          > */}
             <Content >
-                <Logo />
+                <Logo/>
                 <LoginForm />
             </Content>
-          </LinearGradient>
+          {/* </LinearGradient> */}
         </Container>
       );
     }

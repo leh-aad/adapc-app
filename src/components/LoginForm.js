@@ -46,11 +46,11 @@ class LoginForm extends Component {
           alignItems: 'center',
           justifyContent: 'center',
           borderRadius: 20,
-          backgroundColor: '#807DFF',
+          backgroundColor: '#FFFFFF',
           marginTop: 10
         }}
       >
-        <Text> Logar </Text>
+        <Text style={{color: '#807DFF'}}> Logar </Text>
       </Button>
     );
   }
@@ -100,7 +100,7 @@ class LoginForm extends Component {
           </Form>
           
           <Grid style={{marginTop:10}}>
-            <Col style={{ width: '50%' }}>
+            <Col style={{ width: '100%' }}>
               <Button 
                 transparent 
                 light   
@@ -112,10 +112,10 @@ class LoginForm extends Component {
                   <Text style={{ fontSize: 11 }}>Cadastre-se aqui!</Text>
               </Button> 
             </Col>
-            <Col style={{ width: '60%' }}>
-              <Button transparent light style={{ alignItems: 'flex-start' }}>
+            <Col>
+              {/* <Button transparent light style={{ alignItems: 'flex-start' }}>
                <Text style={{ fontSize: 10 }}>Esqueceu sua senha?</Text>
-              </Button> 
+              </Button>  */}
             </Col>
           </Grid>
         </Content>

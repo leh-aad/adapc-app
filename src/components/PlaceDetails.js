@@ -59,14 +59,14 @@ class PlaceDetails extends Component {
         }
         if(openNow){
             return(
-                <Badge success>
-                    <Text>Aberto</Text>
+                <Badge success >
+                    <Text style={{fontSize: 10, marginBottom: 10}}>Aberto agora</Text>
                 </Badge>
             );
         }else {
             return(
-                <Badge danger>
-                    <Text style={{fontSize: 10}}>Fechado</Text>
+                <Badge danger style={{padding:10}}>
+                    <Text style={{fontSize: 10}}>Fechado agora</Text>
                 </Badge>
                 
             );
@@ -79,7 +79,7 @@ class PlaceDetails extends Component {
         return (
             
             <Container>
-                {loading && <Spinner color='blue'/>}
+                {loading && <Spinner color='#415ECC'/>}
 
                 {this.state && this.state.place_details &&
                     
@@ -92,62 +92,47 @@ class PlaceDetails extends Component {
                             />
                         </CardItem>
                         <CardItem> 
-                            <Left style={{marginLeft: 0, paddingLeft: 0}}>
-                                <Text style={{fontSize: 16, color: 'grey', fontWeight: 'bold'}}>{details.result.name}</Text>   
-                            </Left>
-                            <Right> 
-                                <Badge
-                                    style={{
-                                        width: 50,  
-                                        height: 50, 
-                                        borderRadius: 50,
-                                        borderColor: '#807DFF',
-                                        borderWidth: 1.1,
-                                        borderStyle: 'solid',
-                                        justifyContent: 'center',
-                                        alignItems: 'center',
-                                        backgroundColor: 'white'
-                                        }}
-                                    >
-                                    <Text style={{color: '#807DFF'}}>{rating}</Text>
-                                </Badge>
-                            </Right>
+                            <Text style={{fontSize: 16, color: 'grey', fontWeight: 'bold'}}>{details.result.name}</Text>   
+                        </CardItem>
+                        <CardItem>
+                            { rating == null 
+                                ? <Text style={{color: '#807DFF'}}>n/a</Text>
+                                : <Text style={{color: '#807DFF'}}>{rating}/3.00</Text>
+                            } 
                         </CardItem>
                         <Separator></Separator>
                         <CardItem>
                             <Left>
                                 <Icon style={{fontSize: 20, color: 'red'}} type="MaterialIcons" name="place"/>
-                                <Text note>{details.result.formatted_address}</Text>
+                                <Text note style={{fontSize: 10}}>{details.result.formatted_address}</Text>
                             </Left>
                         </CardItem>
-                        <CardItem>
-                            <Left>
-                                {
-                                details.result.website &&        
-                                <Button 
-                                    iconLeft
-                                    rounded
-                                    info 
-                                    onPress={() => Linking.openURL(details.result.website)}
-                                >   
-                                    <Icon type="MaterialIcons" name="web"  />
-                                    <Text>Website</Text>
-                                </Button>
-                                }
+                        {
+                            details.result.website &&   
+                        <CardItem button onPress={() => Linking.openURL(details.result.website)}>
+                            <Left>       
+                                <Icon type="MaterialIcons" style={{fontSize: 20, color: 'blue'}} name="web"  />
+                                <Text note style={{fontSize: 10}}>{details.result.website}</Text>
                             </Left>
-                            <Body>
-                                {details.result.formatted_phone_number &&
-                                <Button 
-                                    iconLeft
-                                    rounded
-                                    success
-                                >   
-                                    <Icon type="MaterialIcons" name="phone"  />
-                                    <Text>{details.result.formatted_phone_number}</Text>
-                                </Button>
-                                }
-                            </Body>
                         </CardItem>
+                        }
+                        
+                        {details.result.formatted_phone_number &&
+                            <CardItem>
+                                <Left
+                                >   
+                                    <Icon type="MaterialIcons" style={{fontSize: 20, color: 'green'}} name="phone"  />
+                                    <Text note style={{fontSize: 10}}>{details.result.formatted_phone_number}</Text>
+                                </Left>
+
+                            </CardItem>
+                        }
+                        {
+                            details.result.opening_hours && details.result.opening_hours.open_now &&
+                            <CardItem>
+                                {this.renderOpenNow(details.result.opening_hours.open_now)}
+                            </CardItem>
+                        }
                         <Separator></Separator>
                         <CardItem button bordered
                             onPress={() => {Actions.push('rating', {rate: this.props.rating, id: details.result.id})}}

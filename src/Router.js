@@ -3,6 +3,7 @@ import { Scene, Router, Tabs, Lightbox, Drawer, Stack } from 'react-native-route
 import { Icon, Text } from 'native-base';
 import { View } from 'react-native';
 import LoginScreen from './components/LoginScreen';
+import ListScreen from './components/ListScreen';
 import HomeScreen from './components/HomeScreen';
 import PlaceDetails from './components/PlaceDetails';
 import SearchScreen from './components/SearchScreen';
@@ -18,7 +19,7 @@ const TabIcon = ({title}) => {
 
 
     if(title == 'Proximidades'){
-        iconName = 'ios-navigate-outline';
+        iconName = 'ios-navigate';
         label = 'Proximidades';
     }
     else if(title == 'Pesquisar'){
@@ -26,15 +27,18 @@ const TabIcon = ({title}) => {
         label = 'Pesquisar';
     }
     else if( title == 'Medalhas'){
-        iconName = 'ribbon'
+        iconName = 'trophy'
         label = 'Medalhas';
+    }
+    else if( title == ''){
+        iconName = 'home'
+        label = 'Home';
     }
 
     return(
         <View style={{ width: '100%', height: '100%', justifyContent: 'center', alignItems: 'center' }}>
-            <Icon name={iconName} style={{fontSize: 24}}/>
-            <Text style={{fontSize: 12}}>{label}</Text> 
-        </View>
+            <Icon name={iconName} style={{fontSize: 24, color:'#807DFF'}}/>
+       </View>
     );
 }
 
@@ -50,7 +54,7 @@ const RouterComponent = () => {
             <Scene 
                 key="root" 
                 navBarButtonColor='white'
-                navigationBarStyle={{backgroundColor: '#807DFF'}}
+                navigationBarStyle={{backgroundColor: '#807DFF', elevation: 0}}
             >
                 <Stack
                     key='auth'
@@ -77,21 +81,27 @@ const RouterComponent = () => {
                         contentComponent={DrawerMenu}
                         drawerIcon={MenuIcon}
                         hideNavBar
-                    >
+                    >   
                         <Scene key="main">
-                            <Tabs
-                                
+                            <Tabs                                
                                 key="tabbar"
                                 tabBarPosition='bottom' 
-                                default="homeScreen"
+                                default="inicialScreen"
                                 showLabel={false}
                                 activeBackgroundColor="#DDD"
-                            >  
+                            > 
                                 <Scene
-                                    key="homeScreen"
+                                    key="inicialScreen"
+                                    title=""
                                     component={HomeScreen}
+                                    icon={TabIcon}
+                                />
+                                <Scene
+                                    key="listScreen"
+                                    component={ListScreen}
                                     title="Proximidades"
                                     icon={TabIcon}
+                                    
                                 />
                                 <Scene
                                     key="searchScreen"
@@ -99,12 +109,12 @@ const RouterComponent = () => {
                                     title="Pesquisar"
                                     icon={TabIcon}
                                 />
-                                {/* <Scene
+                                <Scene
                                     key="badgeScreen"
                                     component={BadgeScreen}
                                     title="Medalhas"
                                     icon={TabIcon}
-                                /> */}
+                                />
                             </Tabs>
                         </Scene>
                     </Drawer>

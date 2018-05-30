@@ -16,7 +16,7 @@ export const getNearPlaces = () => {
             (position) => {
                 const lat = Number(position.coords.latitude.toFixed(6));
                 const long = Number(position.coords.longitude.toFixed(6));
-                let url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${long}&radius=500&key=AIzaSyDXjSZ-gsHxG-WqacY_ufb52WZAF9_jdpo`;
+                let url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${long}&radius=500&language=pt-BR&key=AIzaSyDXjSZ-gsHxG-WqacY_ufb52WZAF9_jdpo`;
                 
                 fetch(url)
                 .then(res=>{
@@ -39,7 +39,7 @@ export const getNearPlaces = () => {
 export const getPlaceDetails = ({place_id}) => {
     return(dispatch) => {
         dispatch({type: GET_DETAILS})
-        let url = 'https://maps.googleapis.com/maps/api/place/details/json?placeid='+place_id+'&key=AIzaSyDXjSZ-gsHxG-WqacY_ufb52WZAF9_jdpo';
+        let url = 'https://maps.googleapis.com/maps/api/place/details/json?placeid='+place_id+'&language=pt-BR&key=AIzaSyDXjSZ-gsHxG-WqacY_ufb52WZAF9_jdpo';
         fetch(url)
         .then(res => {
             if(res){

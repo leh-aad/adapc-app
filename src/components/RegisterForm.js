@@ -86,7 +86,7 @@ class RegisterForm extends Component {
               style={{ backgroundColor: 'rgb(255,255,255)', marginTop: 10, borderRadius: 10, height: 40 }}
             >
               <Input
-                placeholder="Nome"
+                placeholder="Username"
                 value={this.props.name}
                 onChangeText={this.onNameChange.bind(this)}
               />
