@@ -26,8 +26,15 @@ class SearchScreen extends Component{
       }}
       
       styles={{
+        container: {
+          height: 70
+        },
         textInputContainer: {
-          width: '100%'
+          width: '100%',
+          height: 70
+        },
+        textInput:{
+          height: 50
         },
         description: {
           fontWeight: 'bold'
@@ -36,10 +43,13 @@ class SearchScreen extends Component{
           color: '#1faadb'
         },
         listView: {
-          top: 40,
+          top: 70,
           position: 'absolute',
           height: deviceHeight,
           width: deviceWidth
+        },
+        description: {
+          height: 100
         }
       }}
     />

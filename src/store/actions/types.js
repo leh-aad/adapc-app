@@ -36,3 +36,5 @@ export const POINTS_250 = '250_points';
 export const POINTS_500 = '500_points';
 export const POINTS_750 = '750_points';
 export const POINTS_1000 = '1000_points';
+export const FIRST_RATE = 'first_rate';
+export const FIFTH_RATE = 'fifth_rate';

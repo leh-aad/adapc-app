@@ -25,12 +25,14 @@ import {
   Spinner,
   Separator
 } from 'native-base';
+import { Col, Grid, Row } from 'react-native-easy-grid';
 import { connect } from 'react-redux';
+import { getUsersByPoints } from '../store/actions';
 import Badges from '../assets/index';
 class BadgesScreen extends Component{
   
   state = {
-    badges: []
+    badges: [],
   }
 
   componentWillReceiveProps(next){
@@ -48,32 +50,60 @@ class BadgesScreen extends Component{
               {userData && <Text>{userData.points}</Text>}
             </CardItem >
             <CardItem bordered style={{flexWrap: 'wrap'}}>
-            <Text note style={{width: '100%'}}>Sua coleção:</Text>
-              {
-                this.state.badges.map((b,i) => {
-                  return(
-                    <Image  key={i} style={{width: 60, height: 60, margin: 5}}
-                    source={Badges[b.path]}/>  
-                  )
-                })
-              }
+              <Text note style={{width: '100%'}}>Sua coleção:</Text>
+                { this.state.badges != 0
+                  ?
+                  this.state.badges.map((b,i) => {
+                    return(
+                      <Image  key={i} style={{width: 60, height: 60, margin: 5}}
+                      source={Badges[b.path]}/>  
+                    )
+                  })
+                  :
+                  <Text>vazio</Text>
+                }
             </CardItem>
           </Card>
           <Separator/>
           <Card>
             <CardItem bordered>
-              <Text note>Posição no ranking de avaliações: </Text>
+              <Text note>Placar de Pontuação</Text>
+              
+              <Right>
+                <TouchableOpacity onPress={() => {this.props.getUsersByPoints()}}>
+                  <Icon style={{ fontSize: 18}} name='refresh'/>
+                </TouchableOpacity>
+              </Right>
+              
             </CardItem>
             <CardItem bordered>
-              <Text note>TOP 5: </Text>
+               
+              <Grid>
+              <Row>
+                <Col size={15}><Text note style={{fontWeight: 'bold'}}>Pos.</Text></Col>
+                <Col size={50}><Text note style={{fontWeight: 'bold'}}>Nome</Text></Col>
+                <Col size={30}><Text note style={{fontWeight: 'bold'}}>Pontos</Text></Col>
+              </Row>
               {
                 leaderboard && 
                 leaderboard.map((rank,i) => {
-                  return(
-                    <Text key={i}>{i} {rank.name} {rank.points}</Text>
-                  )
-                })
+                  if(i<5){
+                    return(
+                      <Row key={i}>
+                        <Col size={15} style={{alignItems: 'center'}}>
+                          {i==0 && <Icon name="medal" style={{color:'#FFD700', fontSize: 22}}/>}
+                          {i==1 && <Icon name="medal" style={{color:'#C0C0C0', fontSize: 18}}/>}
+                          {i==2 && <Icon name="medal" style={{color:'#CD7F32', fontSize: 18}}/>}
+                          {i >2 && <Text note style={{textAlign:'center'}}>{i+1}</Text> }
+                        </Col>
+                        <Col size={50}><Text note>{rank.name}</Text></Col>
+                        <Col size={30}><Text note>{rank.points}</Text></Col>
+                      </Row>
+                    )
+                  }
+                }) 
               }
+              </Grid>
             </CardItem>
           </Card>
         </Content>
@@ -88,4 +118,6 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps,{})(BadgesScreen);
+export default connect(mapStateToProps,{
+  getUsersByPoints
+})(BadgesScreen);

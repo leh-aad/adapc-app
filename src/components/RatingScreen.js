@@ -107,11 +107,10 @@ class RatingScreen extends Component{
                                     count={3}
                                     size={30}
                                     defaultRating={0}
+                                    reviews={["Não possui", "Parcialmente", "Possui"]}
                                     onFinishRating={this.ratingCompleted}  
                                     style={{marginTop: 100}} 
                                 />
-                            
-                            <Text style={{display: 'flex', alignItems: 'flex-end', alignSelf: 'flex-end'}}>Pular ></Text>
                             </View>
                         )
                     }}

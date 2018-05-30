@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {  TouchableOpacity } from "react-native";
 import { 
     Card, 
     CardItem, 
@@ -29,26 +30,19 @@ class PlaceItem extends Component {
     render(){
         const { name, photos, vicinity} = this.props.item;
         return(
-            <Card>
-                <CardItem>
-                    <Left>
-                        <Body>
-                            <Text>{name}</Text>
-                            <Text note>{vicinity}</Text>
-                        </Body>
-                    </Left>
-                </CardItem>
-                <CardItem>
-                <Left>
-                    <Icon active type="MaterialIcons" name="accessible" />
-                </Left>
-                <Right>
-                    <Button transparent onPress={this.onButtonPress}>
-                    <Text>Detalhes</Text>
-                    </Button>
-                </Right>
-                </CardItem>
-            </Card>
+            <TouchableOpacity onPress={this.onButtonPress}>
+                <Card>
+                    <CardItem>
+                        <Left>
+                            <Body>
+                                <Text> {name}</Text>
+                                <Text note style={{fontSize: 10}}><Icon style={{fontSize: 8, color: '#807DFF'}} type="MaterialIcons" name="place"/> {vicinity}</Text>
+                            </Body>
+                        </Left>
+                    </CardItem>
+                </Card>
+            </TouchableOpacity>
+
         );
     }
 }

@@ -1,4 +1,4 @@
-import { FIRST_LOGIN, FIFTH_LOGIN, TENTH_LOGIN, POINTS_100, POINTS_250, POINTS_500, POINTS_750, POINTS_1000, GET_LEADERBOARD } from "../actions/types";
+import { FIRST_LOGIN, FIFTH_LOGIN, TENTH_LOGIN, POINTS_100, POINTS_250, POINTS_500, POINTS_750, POINTS_1000, GET_LEADERBOARD, FIRST_RATE, FIFTH_RATE } from "../actions/types";
 
 const INITIAL_STATE = {
     medal: '',
@@ -24,6 +24,10 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, medal: POINTS_750}
         case POINTS_1000:
             return { ...state, medal: POINTS_1000}
+        case FIRST_RATE:
+            return { ...state, medal: FIRST_RATE}
+        case FIFTH_RATE:
+            return { ...state, medal: FIFTH_RATE}
         case GET_LEADERBOARD: 
             return { ...state, leaderboard: action.payload}
         default:
