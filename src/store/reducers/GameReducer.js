@@ -1,9 +1,9 @@
-import { FIRST_LOGIN, FIFTH_LOGIN, TENTH_LOGIN, POINTS_100, POINTS_250, POINTS_500, POINTS_750, POINTS_1000, GET_LEADERBOARD, FIRST_RATE, FIFTH_RATE, FOOD_BADGE, SCHOOL_BADGE } from "../actions/types";
+import { FIRST_LOGIN, FIFTH_LOGIN, TENTH_LOGIN, POINTS_100, POINTS_250, POINTS_500, POINTS_750, POINTS_1000, GET_LEADERBOARD, FIRST_RATE, FIFTH_RATE, FOOD_BADGE, SCHOOL_BADGE, GET_RANKING } from "../actions/types";
 
 const INITIAL_STATE = {
     medal: '',
     leaderboard: [],
-    trigger: false,
+    rank: 0,
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -34,6 +34,8 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, medal: SCHOOL_BADGE}
         case GET_LEADERBOARD: 
             return { ...state, leaderboard: action.payload}
+        case GET_RANKING:
+            return { ...state, rank: action.payload}
         default:
             return { ...state, medal: ''}
     }

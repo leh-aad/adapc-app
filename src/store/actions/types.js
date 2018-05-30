@@ -27,6 +27,7 @@ export const FIFTH_LOGIN = 'fifth_login';
 export const TENTH_LOGIN = 'tenth_login';
 export const GET_USER_COUNT = 'get_user_count';
 export const GET_LEADERBOARD = 'get_leaderboard';
+export const GET_RANKING = 'get_ranking';
 export const UPDATE_POINTS_25 = 'update_points_25';
 export const UPDATE_POINTS_50 = 'update_points_50';
 export const UPDATE_RATE_COUNT = 'update_rate_count';

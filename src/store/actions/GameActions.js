@@ -1,5 +1,5 @@
 import firebase from 'firebase';
-import { UPDATE_LOGIN_COUNT, FIRST_LOGIN, GET_USER_COUNT, FIFTH_LOGIN, TENTH_LOGIN, UPDATE_POINTS_25, UPDATE_RATE_COUNT, UPDATE_POINTS_50, POINTS_100, POINTS_250, POINTS_500, POINTS_750, POINTS_1000, UPDATE_BADGES, GET_USERS_BY_POINTS, GET_LEADERBOARD, FIRST_RATE, FIFTH_RATE, FOOD_BADGE, SCHOOL_BADGE } from './types';
+import { UPDATE_LOGIN_COUNT, FIRST_LOGIN, GET_USER_COUNT, FIFTH_LOGIN, TENTH_LOGIN, UPDATE_POINTS_25, UPDATE_RATE_COUNT, UPDATE_POINTS_50, POINTS_100, POINTS_250, POINTS_500, POINTS_750, POINTS_1000, UPDATE_BADGES, GET_USERS_BY_POINTS, GET_LEADERBOARD, FIRST_RATE, FIFTH_RATE, FOOD_BADGE, SCHOOL_BADGE, GET_RANKING } from './types';
 
 export const gameAction = () => {
     var user = firebase.auth().currentUser;
@@ -48,14 +48,13 @@ export const updatePointsRating = (points,rating) => {
         })
         dispatch(checkPoints(points+50));
         dispatch(checkRatingCount(rating+1));
-        dispatch({type: UPDATE_POINTS_50, payload: points+50});
-        dispatch({type: UPDATE_RATE_COUNT, payload: rating+1});
-       
+        
     }
 }
 
 export const checkRatingCount = (count) => {
     return(dispatch) => {
+        var badge = null;
         switch(count){
             case 1:
                 dispatch({type: FIRST_RATE})
@@ -75,6 +74,7 @@ export const checkRatingCount = (count) => {
 //refac para maior ou igual 
 export const checkPoints = (points) => {
     return(dispatch) => {
+        var badge= null;
         switch(points){
             case 100:
                 dispatch({type: POINTS_100})
@@ -160,5 +160,16 @@ export const getUsersByPoints = () => {
             leaderboard.unshift({name: snap.val().name, points: snap.val().points})
             dispath({type: GET_LEADERBOARD, payload: leaderboard})  
         })
+    }
+}
+
+export const getUserRank = (leaderboard,username) =>{
+    return(dispatch) => {
+        for(var i = 0; leaderboard.length; i++){
+            if(leaderboard[i].name == username){
+                dispatch({type: GET_RANKING, payload: i});
+                return;
+            }
+        }
     }
 }

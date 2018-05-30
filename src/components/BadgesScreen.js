@@ -27,7 +27,7 @@ import {
 } from 'native-base';
 import { Col, Grid, Row } from 'react-native-easy-grid';
 import { connect } from 'react-redux';
-import { getUsersByPoints } from '../store/actions';
+import { getUsersByPoints, getUserRank  } from '../store/actions';
 import Badges from '../assets/index';
 class BadgesScreen extends Component{
   
@@ -35,8 +35,11 @@ class BadgesScreen extends Component{
     badges: [],
   }
 
+
+
   componentWillReceiveProps(next){
     this.setState({badges: next.userData.badges})
+   //this.props.getUserRank(this.props.leaderboard, this.props.userData.name);
   }
   
   render(){
@@ -103,6 +106,10 @@ class BadgesScreen extends Component{
                   }
                 }) 
               }
+              {/* {
+                this.props.rank && 
+                <Text>{this.props.rank}</Text>
+              } */}
               </Grid>
             </CardItem>
           </Card>
@@ -114,10 +121,11 @@ class BadgesScreen extends Component{
 const mapStateToProps = state => {
   return{
     userData: state.auth.userData,  
-    leaderboard: state.game.leaderboard
+    leaderboard: state.game.leaderboard,
+    rank: state.game.rank
   };
 };
 
 export default connect(mapStateToProps,{
-  getUsersByPoints
+  getUsersByPoints, getUserRank
 })(BadgesScreen);
