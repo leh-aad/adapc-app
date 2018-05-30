@@ -135,7 +135,7 @@ class PlaceDetails extends Component {
                         }
                         <Separator></Separator>
                         <CardItem button bordered
-                            onPress={() => {Actions.push('rating', {rate: this.props.rating, id: details.result.id})}}
+                            onPress={() => {Actions.push('rating', {rate: this.props.rating, id: details.result.id, types: details.result.types})}}
                         >
                             <Body>
                                 <Text style={{color: '#807DFF'}}>Avaliar acessibilidade</Text>

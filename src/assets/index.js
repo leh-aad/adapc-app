@@ -6,7 +6,10 @@ const Badges = {
     p750: require('./750p.png'),
     p1000: require('./1000p.png'),
     star1: require('./star1.png'),
-    door5: require('./door5.png')
+    star5: require('./star5.png'),
+    door5: require('./door5.png'),
+    food: require('./food.png'),
+    books: require('./books.png')
 }
 
 export default Badges;

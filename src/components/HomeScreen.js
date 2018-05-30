@@ -66,7 +66,7 @@ class HomeScreen extends Component {
                     <List>
                         <ListItem button onPress={() => {Actions.listScreen()}}>
                             <Left>
-                                <Text note style={{fontSize: 10}}>Avalie a acessibilidade de locais.{"\n"}Ganhe pontos!</Text>
+                                <Text note style={{fontSize: 11}}>Avalie a acessibilidade de locais.{"\n"}Ganhe pontos!</Text>
                             </Left>
                             <Right>
                                 <Icon name="arrow-forward" />
@@ -74,7 +74,7 @@ class HomeScreen extends Component {
                         </ListItem>
                         <ListItem button onPress={() => {Actions.searchScreen()}}>
                             <Left>
-                                <Text note style={{fontSize: 10}}>Pesquise novos locais.</Text>
+                                <Text note style={{fontSize: 11}}>Pesquise novos locais.</Text>
                             </Left>
                             <Right>
                                 <Icon name="arrow-forward" />
@@ -82,7 +82,7 @@ class HomeScreen extends Component {
                         </ListItem>
                         <ListItem button onPress={() => {Actions.badgeScreen()}}>
                             <Left>
-                                <Text note style={{fontSize: 10}}>Descubra recompensas.{"\n"}Aumente sua coleção.</Text>
+                                <Text note style={{fontSize: 11}}>Descubra recompensas.{"\n"}Aumente sua coleção.</Text>
                             </Left>
                             <Right>
                                 <Icon name="arrow-forward" />
@@ -100,4 +100,4 @@ const mapStateToProps = state => {
         userData: state.auth.userData        
    }
 }
-export default connect(mapStateToProps,{ })(HomeScreen);
+export default connect(mapStateToProps,{})(HomeScreen);

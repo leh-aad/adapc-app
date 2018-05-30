@@ -38,3 +38,5 @@ export const POINTS_750 = '750_points';
 export const POINTS_1000 = '1000_points';
 export const FIRST_RATE = 'first_rate';
 export const FIFTH_RATE = 'fifth_rate';
+export const FOOD_BADGE = 'food_badge';
+export const SCHOOL_BADGE = 'school_badge';

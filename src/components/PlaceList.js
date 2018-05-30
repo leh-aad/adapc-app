@@ -11,7 +11,7 @@ import { Spinner, Icon } from 'native-base';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux'
 import { getNearPlaces, updateLoginCount } from '../store/actions';
-import { FIRST_LOGIN, FIFTH_LOGIN, TENTH_LOGIN, POINTS_100, POINTS_250, POINTS_500,POINTS_750, POINTS_1000, FIRST_RATE, FIFTH_RATE } from '../store/actions/types';
+import { FIRST_LOGIN, FIFTH_LOGIN, TENTH_LOGIN, POINTS_100, POINTS_250, POINTS_500,POINTS_750, POINTS_1000, FIRST_RATE, FIFTH_RATE, FOOD_BADGE, SCHOOL_BADGE } from '../store/actions/types';
 import PlaceItem from './PlaceItem';
 import Badges from '../assets/index';
 
@@ -89,6 +89,20 @@ class PlaceList extends Component {
         visibleModal: true, 
         modalText: 'Você realizou sua quinta avaliação! Continue assim!',
         badgePath: Badges.star5
+      });
+    }
+    if(this.props.medal == FOOD_BADGE){
+      this.setState({
+        visibleModal: true, 
+        modalText: 'Yuumy',
+        badgePath: Badges.food
+      });
+    }
+    if(this.props.medal == SCHOOL_BADGE){
+      this.setState({
+        visibleModal: true, 
+        modalText: 'De volta aos estudos!',
+        badgePath: Badges.books
       });
     }
   }

@@ -1,5 +1,5 @@
 import firebase from 'firebase';
-import { UPDATE_LOGIN_COUNT, FIRST_LOGIN, GET_USER_COUNT, FIFTH_LOGIN, TENTH_LOGIN, UPDATE_POINTS_25, UPDATE_RATE_COUNT, UPDATE_POINTS_50, POINTS_100, POINTS_250, POINTS_500, POINTS_750, POINTS_1000, UPDATE_BADGES, GET_USERS_BY_POINTS, GET_LEADERBOARD, FIRST_RATE, FIFTH_RATE } from './types';
+import { UPDATE_LOGIN_COUNT, FIRST_LOGIN, GET_USER_COUNT, FIFTH_LOGIN, TENTH_LOGIN, UPDATE_POINTS_25, UPDATE_RATE_COUNT, UPDATE_POINTS_50, POINTS_100, POINTS_250, POINTS_500, POINTS_750, POINTS_1000, UPDATE_BADGES, GET_USERS_BY_POINTS, GET_LEADERBOARD, FIRST_RATE, FIFTH_RATE, FOOD_BADGE, SCHOOL_BADGE } from './types';
 
 export const gameAction = () => {
     var user = firebase.auth().currentUser;
@@ -47,20 +47,31 @@ export const updatePointsRating = (points,rating) => {
             ratingCount: rating + 1
         })
         dispatch(checkPoints(points+50));
+        dispatch(checkRatingCount(rating+1));
         dispatch({type: UPDATE_POINTS_50, payload: points+50});
         dispatch({type: UPDATE_RATE_COUNT, payload: rating+1});
-        if(rating+1 == 1){
-            badge = {name: FIRST_RATE, path: 'star1'}
-            dispatch(updateBadgeList(badge))
-            dispatch({type: FIRST_RATE})
-        }
-        if(rating+1 == 5){
-            badge = {name: FIFTH_RATE, path: 'star5'}
-            dispatch(updateBadgeList(badge))
-            dispatch({type: FIFTH_RATE})
+       
+    }
+}
+
+export const checkRatingCount = (count) => {
+    return(dispatch) => {
+        switch(count){
+            case 1:
+                dispatch({type: FIRST_RATE})
+                badge = {name: FIRST_RATE, path: 'star1'}
+                dispatch(updateBadgeList(badge))
+                break;
+            case 5:
+                dispatch({type: FIFTH_RATE})
+                badge = {name: FIFTH_RATE, path: 'star5'}
+                dispatch(updateBadgeList(badge))
+            default:
+                return;
         }
     }
 }
+
 //refac para maior ou igual 
 export const checkPoints = (points) => {
     return(dispatch) => {
@@ -92,6 +103,30 @@ export const checkPoints = (points) => {
                 break;
             default:
                 return;
+        }
+    }
+}
+
+export const checkRateType = (types,badges) =>{
+    return(dispatch) => {
+        var badge= null;
+        for(var i=0; badges.length; i++){
+            for(var j=0; types.length; j++){
+                if(badges[i].name != types[j]){
+                    if(types[j] == 'restaurant' || types[j] == 'food'){
+                        dispatch({type: FOOD_BADGE})
+                        badge = {name: FOOD_BADGE, path: 'food'}
+                        dispatch(updateBadgeList(badge))
+                        return;
+                    }
+                    if(types[j] == 'school' || types[j] == 'university'){
+                        dispatch({type: SCHOOL_BADGE})
+                        badge = {name: SCHOOL_BADGE, path: 'books'}
+                        dispatch(updateBadgeList(badge))
+                        return;
+                    }
+                }
+            }
         }
     }
 }
